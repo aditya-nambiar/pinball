@@ -47,12 +47,21 @@ namespace cs296
 	b2Body* rflipstatd;
 	b2Body* lflipper;
 	b2Body* rflipper;
-	b2Body* rightsep;
+	b2Body* rightsep1;
+	b2Body* rightsep2;
 	b2Body* launcher;
 	b2Body* ball;
 	b2Body* stopper;
+	b2Body* temp2;
+	b2Body* temp1;
+	b2Body* temp;
+	b2Body* horz;
+	b2Body* hormov;
+	b2Body* vermov;
 	b2RevoluteJoint* lflip;
 	b2RevoluteJoint* rflip;
+	b2PrismaticJoint* right;
+	b2PrismaticJoint* up;
     void keyboard(unsigned char key);
     void keyboardUp(unsigned char key);
 	static base_sim_t* create()
