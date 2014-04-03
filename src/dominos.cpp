@@ -80,7 +80,7 @@ namespace cs296
 			fd.density = 5.0f;
 				
 			b2BodyDef bd;
-			bd.position.Set(-12.0f, 10.0f);
+			bd.position.Set(-12.0f, 9.0f);
 			lflipstatv = m_world->CreateBody(&bd);
 			lflipstatv->CreateFixture(&fd);
 		}
@@ -99,7 +99,7 @@ namespace cs296
 			fd.density = 5.0f;
 			fd.restitution=1.8;
 			b2BodyDef bd;
-			bd.position.Set(-6.0f, 10.0f);
+			bd.position.Set(-6.0f, 9.0f);
 			triangle1 = m_world->CreateBody(&bd);
 			triangle1->CreateFixture(&fd);
 		}
@@ -118,7 +118,7 @@ namespace cs296
 			fd.density = 5.0f;
 			fd.restitution=1.8;
 			b2BodyDef bd;
-			bd.position.Set(6.0f, 10.0f);
+			bd.position.Set(6.0f, 9.0f);
 			triangle2 = m_world->CreateBody(&bd);
 			triangle2->CreateFixture(&fd);
 		}
@@ -130,7 +130,7 @@ namespace cs296
 			    boxFixtureDef.shape = &boxShape;			
 				b2BodyDef bd;
 				bd.angle = 0* DEGTORAD;
-				bd.position.Set(13.0f, 19.0f);
+				bd.position.Set(13.0f, 9.0f);
 				rightsep1= m_world->CreateBody(&bd);
 				rightsep1->CreateFixture(&boxFixtureDef);
 			
@@ -143,7 +143,7 @@ namespace cs296
 			    boxFixtureDef.shape = &boxShape;			
 				b2BodyDef bd;
 				bd.angle = 0* DEGTORAD;
-				bd.position.Set(13.0f, 3.7f);
+				bd.position.Set(13.0f, 2.7f);
 				rightsep2= m_world->CreateBody(&bd);
 				rightsep2->CreateFixture(&boxFixtureDef);
 			
@@ -151,7 +151,7 @@ namespace cs296
 		{
 			
 				b2PolygonShape boxShape;
-				boxShape.SetAsBox(0.2,1.0);
+				boxShape.SetAsBox(0.2,0.25);
 			    b2FixtureDef boxFixtureDef;
 			    boxFixtureDef.shape = &boxShape;			
 				b2BodyDef bd;
@@ -224,7 +224,7 @@ namespace cs296
 		    boxFixtureDef.shape = &boxShape;			
 			b2BodyDef bd;
 			bd.angle = -20* DEGTORAD;
-			bd.position.Set(-9.5f, 9.0f);
+			bd.position.Set(-9.5f, 8.0f);
 			lflipstatd = m_world->CreateBody(&bd);
 			lflipstatd->CreateFixture(&boxFixtureDef);
 		}
@@ -244,7 +244,7 @@ namespace cs296
 			fd.density = 5.0f;
 				
 			b2BodyDef bd;
-			bd.position.Set(12.0f, 9.9f);
+			bd.position.Set(12.0f, 8.9f);
 			rflipstatv = m_world->CreateBody(&bd);
 			rflipstatv->CreateFixture(&fd);
 		}
@@ -255,7 +255,7 @@ namespace cs296
 		    boxFixtureDef.shape = &boxShape;			
 			b2BodyDef bd;
 			bd.angle = 20* DEGTORAD;
-			bd.position.Set(9.0f, 9.0f);
+			bd.position.Set(9.0f, 8.0f);
 			rflipstatd = m_world->CreateBody(&bd);
 			rflipstatd->CreateFixture(&boxFixtureDef);
 		}
@@ -277,7 +277,7 @@ namespace cs296
 		    boxFixtureDef.shape = &boxShape;			
 			b2BodyDef bd;
 			bd.angle = -60* DEGTORAD;
-			bd.position.Set(-13.5f, 19.0f);
+			bd.position.Set(-13.5f, 18.0f);
 			temp1 = m_world->CreateBody(&bd);
 			temp1->CreateFixture(&boxFixtureDef);
 			
@@ -295,7 +295,7 @@ namespace cs296
 			boxFixtureDef.density=5.0f;	
 			bd.type = b2_dynamicBody;
 			bd.angle = -30* DEGTORAD;
-			bd.position.Set(-3.0f, 8.0f);
+			bd.position.Set(-3.0f, 7.0f);
 			lflipper = m_world->CreateBody(&bd);
 			lflipper->CreateFixture(&boxFixtureDef);
 		}
@@ -308,7 +308,7 @@ namespace cs296
 			b2BodyDef bd;
 			bd.type = b2_dynamicBody;
 			bd.angle = 30* DEGTORAD;
-			bd.position.Set(3.0f, 8.0f);
+			bd.position.Set(3.0f, 7.0f);
 			rflipper = m_world->CreateBody(&bd);
 			rflipper->CreateFixture(&boxFixtureDef);
 		}
@@ -424,16 +424,16 @@ namespace cs296
 			launcher->ApplyLinearImpulse( b2Vec2(0,1100),launcher->GetWorldCenter() ,true);
 			break;
 			case 'q':
-			right->SetMotorSpeed(2.0f);
+			right->SetMotorSpeed(4.0f);
 			break;
 			case 'w':
-			right->SetMotorSpeed(-2.0f);
+			right->SetMotorSpeed(-4.0f);
 			break;
 			case 'f':
-			up->SetMotorSpeed(2.0f);
+			up->SetMotorSpeed(2.5f);
 			break;
 			case 'v':
-			up->SetMotorSpeed(-2.0f);
+			up->SetMotorSpeed(-2.5f);
 			break;
 			
 	
