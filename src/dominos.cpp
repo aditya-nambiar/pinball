@@ -84,25 +84,47 @@ namespace cs296
 			lflipstatv = m_world->CreateBody(&bd);
 			lflipstatv->CreateFixture(&fd);
 		}
-		// {
-	// 		b2PolygonShape shp;
-	// 		b2Vec2 vertices[2];
-	// 		vertices[0].Set(13.0f, -2.0f);
-	// 		vertices[1].Set(13.0f,10.5f);
-	// 		
-	// 		
-	// 		
-	// 		shp.Set(vertices, 2);
-	// 
-	// 		b2FixtureDef fd;
-	// 		fd.shape = &shp;
-	// 		fd.density = 5.0f;
-	// 			
-	// 		b2BodyDef bd;
-	// 		bd.position.Set(12.0f, 10.0f);
-	// 		rightsep = m_world->CreateBody(&bd);
-	// 		rightsep->CreateFixture(&fd);
-	// 	}
+		{
+			
+				b2PolygonShape boxShape;
+				boxShape.SetAsBox(0.2,15);
+			    b2FixtureDef boxFixtureDef;
+			    boxFixtureDef.shape = &boxShape;			
+				b2BodyDef bd;
+				bd.angle = 0* DEGTORAD;
+				bd.position.Set(13.0f, 13.0f);
+				rightsep= m_world->CreateBody(&bd);
+				rightsep->CreateFixture(&boxFixtureDef);
+			
+		}
+		{
+			
+				b2PolygonShape boxShape;
+				boxShape.SetAsBox(0.2,0.2);
+			    b2FixtureDef boxFixtureDef;
+			    boxFixtureDef.shape = &boxShape;			
+				b2BodyDef bd;
+				bd.angle = 0* DEGTORAD;
+				bd.position.Set(13.2f, 6.0f);
+				stopper= m_world->CreateBody(&bd);
+				stopper->CreateFixture(&boxFixtureDef);
+			
+		}
+		{
+			
+				b2PolygonShape boxShape;
+				boxShape.SetAsBox(0.8,2);
+			    b2FixtureDef boxFixtureDef;
+			    boxFixtureDef.shape = &boxShape;
+				boxFixtureDef.density=5.0f;			
+				b2BodyDef bd;
+				bd.type = b2_dynamicBody;
+				bd.angle = 0* DEGTORAD;
+				bd.position.Set(13.8f, 5.0f);
+				launcher= m_world->CreateBody(&bd);
+				launcher->CreateFixture(&boxFixtureDef);
+			
+		}
 		{
 			b2PolygonShape boxShape;
 			boxShape.SetAsBox(3.5,0.2);
@@ -172,7 +194,27 @@ namespace cs296
 			rflipper = m_world->CreateBody(&bd);
 			rflipper->CreateFixture(&boxFixtureDef);
 		}
+		{
+			
+		    b2BodyDef bd;
+		    bd.type = b2_dynamicBody;
+		    bd.position.Set(13.5, 9);
+		    
+
 		
+
+		    b2CircleShape circle;
+		    circle.m_radius = 0.54f;
+
+		    b2FixtureDef fixtureDef;
+		    fixtureDef.shape = &circle;
+		    fixtureDef.density = 1.0f;
+		    fixtureDef.friction = 0.f;
+		    fixtureDef.restitution = 0.2f;
+		   
+			ball= m_world->CreateBody(&bd);
+		    ball->CreateFixture(&fixtureDef);
+		}
 		{
 		//the motorised joint
 		b2RevoluteJointDef revoluteJointDef;
@@ -226,6 +268,9 @@ namespace cs296
 			break;
 			case 'd':
 			rflipper->ApplyAngularImpulse(-2000.0f,true); 
+			break;
+			case 'l':
+			launcher->ApplyLinearImpulse( b2Vec2(0,1100),launcher->GetWorldCenter() ,true);
 			break;
 			
 	

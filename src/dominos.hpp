@@ -48,6 +48,9 @@ namespace cs296
 	b2Body* lflipper;
 	b2Body* rflipper;
 	b2Body* rightsep;
+	b2Body* launcher;
+	b2Body* ball;
+	b2Body* stopper;
 	b2RevoluteJoint* lflip;
 	b2RevoluteJoint* rflip;
     void keyboard(unsigned char key);
