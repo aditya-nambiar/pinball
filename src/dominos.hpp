@@ -58,6 +58,8 @@ namespace cs296
 	b2Body* horz;
 	b2Body* hormov;
 	b2Body* vermov;
+	b2Body* triangle1;
+	b2Body* triangle2;
 	b2RevoluteJoint* lflip;
 	b2RevoluteJoint* rflip;
 	b2PrismaticJoint* right;

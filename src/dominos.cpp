@@ -85,6 +85,44 @@ namespace cs296
 			lflipstatv->CreateFixture(&fd);
 		}
 		{
+			b2PolygonShape shp;
+			b2Vec2 vertices[3];
+			vertices[0].Set(0.0f, 0.0f);
+			vertices[1].Set(-3.5f,7.0f);
+			vertices[2].Set(-3.5f, 2.0f);
+			
+			
+			shp.Set(vertices, 3);
+
+			b2FixtureDef fd;
+			fd.shape = &shp;
+			fd.density = 5.0f;
+			fd.restitution=1.8;
+			b2BodyDef bd;
+			bd.position.Set(-6.0f, 10.0f);
+			triangle1 = m_world->CreateBody(&bd);
+			triangle1->CreateFixture(&fd);
+		}
+		{
+			b2PolygonShape shp;
+			b2Vec2 vertices[3];
+			vertices[0].Set(0.0f, 0.0f);
+			vertices[1].Set(3.5f, 2.0f);
+			vertices[2].Set(3.5f, 7.0f);
+			
+			
+			shp.Set(vertices, 3);
+
+			b2FixtureDef fd;
+			fd.shape = &shp;
+			fd.density = 5.0f;
+			fd.restitution=1.8;
+			b2BodyDef bd;
+			bd.position.Set(6.0f, 10.0f);
+			triangle2 = m_world->CreateBody(&bd);
+			triangle2->CreateFixture(&fd);
+		}
+		{
 			
 				b2PolygonShape boxShape;
 				boxShape.SetAsBox(0.2,9);
@@ -181,7 +219,7 @@ namespace cs296
 		}
 		{
 			b2PolygonShape boxShape;
-			boxShape.SetAsBox(3.5,0.2);
+			boxShape.SetAsBox(3.5,0.4);
 		    b2FixtureDef boxFixtureDef;
 		    boxFixtureDef.shape = &boxShape;			
 			b2BodyDef bd;
@@ -212,7 +250,7 @@ namespace cs296
 		}
 		{
 			b2PolygonShape boxShape;
-			boxShape.SetAsBox(3.5,0.2);
+			boxShape.SetAsBox(3.5,0.4);
 		    b2FixtureDef boxFixtureDef;
 		    boxFixtureDef.shape = &boxShape;			
 			b2BodyDef bd;
@@ -249,7 +287,7 @@ namespace cs296
 	
 		{
 			b2PolygonShape boxShape;
-			boxShape.SetAsBox(3.0,0.2);
+			boxShape.SetAsBox(3.0,0.4);
 		    b2FixtureDef boxFixtureDef;
 		    boxFixtureDef.shape = &boxShape;
 					
@@ -263,7 +301,7 @@ namespace cs296
 		}
 		{
 			b2PolygonShape boxShape;
-			boxShape.SetAsBox(3.0,0.2);
+			boxShape.SetAsBox(3.0,0.4);
 		    b2FixtureDef boxFixtureDef;
 		    boxFixtureDef.shape = &boxShape;	
 			boxFixtureDef.density=5.0f;			
