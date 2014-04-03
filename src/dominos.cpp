@@ -51,12 +51,11 @@ namespace cs296
 			ground = m_world->CreateBody(&bd);
 
 			b2Vec2 vs[10];
-			vs[0].Set(10.0f, 0.0f);
-			vs[1].Set(8.0f, 40.0f);
-			vs[2].Set(0.0f, 45.0f);
-			vs[3].Set(-8.0f, 40.0f);
-			vs[4].Set(-10.0f, 0.0f);
-
+			vs[0].Set(15.0f, -2.0f);
+			vs[1].Set(15.0f, 42.0f);
+			vs[2].Set(-15.0f, 42.0f);
+			vs[3].Set(-15.0f, -2.0f);
+			
 			b2ChainShape loop;
 			loop.CreateLoop(vs, 5);
 			b2FixtureDef fd;
@@ -65,50 +64,154 @@ namespace cs296
 			ground->CreateFixture(&fd);
 		}
 		
-		// Flippers
 		{
-			b2Vec2 p1(-2.0f, 10.0f), p2(2.0f, 10.0f);
-
-			b2BodyDef bd;
-			bd.type = b2_dynamicBody;
-
-			bd.position = p1;
-			b2Body* leftFlipper = m_world->CreateBody(&bd);
-
-			bd.position = p2;
-			b2Body* rightFlipper = m_world->CreateBody(&bd);
-
-			b2PolygonShape box;
-			box.SetAsBox(1.75f, 0.1f);
+			b2PolygonShape shp;
+			b2Vec2 vertices[4];
+			vertices[0].Set(0.0f, 6.5f);
+			vertices[1].Set(-0.5f,6.5f);
+			vertices[2].Set(-0.5f, 0.0f);
+			vertices[3].Set(-0.0f, 0.5f);
+			
+			
+			shp.Set(vertices, 4);
 
 			b2FixtureDef fd;
-			fd.shape = &box;
-			fd.density = 1.0f;
-
-			leftFlipper->CreateFixture(&fd);
-			rightFlipper->CreateFixture(&fd);
-
-			b2RevoluteJointDef jd;
-			jd.bodyA = ground;
-			jd.localAnchorB.SetZero();
-			jd.enableMotor = true;
-			jd.maxMotorTorque = 1000.0f;
-			jd.enableLimit = true;
-
-			jd.motorSpeed = 0.0f;
-			jd.localAnchorA = p1;
-			jd.bodyB = leftFlipper;
-			jd.lowerAngle = -30.0f * b2_pi / 180.0f;
-			jd.upperAngle = 5.0f * b2_pi / 180.0f;
-			m_leftJoint = (b2RevoluteJoint*)m_world->CreateJoint(&jd);
-
-			jd.motorSpeed = 0.0f;
-			jd.localAnchorA = p2;
-			jd.bodyB = rightFlipper;
-			jd.lowerAngle = -5.0f * b2_pi / 180.0f;
-			jd.upperAngle = 30.0f * b2_pi / 180.0f;
-			m_rightJoint = (b2RevoluteJoint*)m_world->CreateJoint(&jd);
+			fd.shape = &shp;
+			fd.density = 5.0f;
+				
+			b2BodyDef bd;
+			bd.position.Set(-12.0f, 10.0f);
+			lflipstatv = m_world->CreateBody(&bd);
+			lflipstatv->CreateFixture(&fd);
 		}
+		// {
+	// 		b2PolygonShape shp;
+	// 		b2Vec2 vertices[2];
+	// 		vertices[0].Set(13.0f, -2.0f);
+	// 		vertices[1].Set(13.0f,10.5f);
+	// 		
+	// 		
+	// 		
+	// 		shp.Set(vertices, 2);
+	// 
+	// 		b2FixtureDef fd;
+	// 		fd.shape = &shp;
+	// 		fd.density = 5.0f;
+	// 			
+	// 		b2BodyDef bd;
+	// 		bd.position.Set(12.0f, 10.0f);
+	// 		rightsep = m_world->CreateBody(&bd);
+	// 		rightsep->CreateFixture(&fd);
+	// 	}
+		{
+			b2PolygonShape boxShape;
+			boxShape.SetAsBox(3.5,0.2);
+		    b2FixtureDef boxFixtureDef;
+		    boxFixtureDef.shape = &boxShape;			
+			b2BodyDef bd;
+			bd.angle = -20* DEGTORAD;
+			bd.position.Set(-9.5f, 9.0f);
+			lflipstatd = m_world->CreateBody(&bd);
+			lflipstatd->CreateFixture(&boxFixtureDef);
+		}
+		{
+			b2PolygonShape shp;
+			b2Vec2 vertices[4];
+			vertices[0].Set(0.0f, 6.5f);
+			vertices[1].Set(-0.5f,6.5f);
+			vertices[2].Set(-0.5f, 0.5f);
+			vertices[3].Set(-0.0f, 0.0f);
+			
+			
+			shp.Set(vertices, 4);
+
+			b2FixtureDef fd;
+			fd.shape = &shp;
+			fd.density = 5.0f;
+				
+			b2BodyDef bd;
+			bd.position.Set(12.0f, 10.0f);
+			rflipstatv = m_world->CreateBody(&bd);
+			rflipstatv->CreateFixture(&fd);
+		}
+		{
+			b2PolygonShape boxShape;
+			boxShape.SetAsBox(3.5,0.2);
+		    b2FixtureDef boxFixtureDef;
+		    boxFixtureDef.shape = &boxShape;			
+			b2BodyDef bd;
+			bd.angle = 20* DEGTORAD;
+			bd.position.Set(9.0f, 9.0f);
+			rflipstatd = m_world->CreateBody(&bd);
+			rflipstatd->CreateFixture(&boxFixtureDef);
+		}
+		{
+			b2PolygonShape boxShape;
+			boxShape.SetAsBox(2.5,0.2);
+		    b2FixtureDef boxFixtureDef;
+		    boxFixtureDef.shape = &boxShape;
+					
+			b2BodyDef bd;
+			boxFixtureDef.density=5.0f;	
+			bd.type = b2_dynamicBody;
+			bd.angle = -30* DEGTORAD;
+			bd.position.Set(-3.0f, 8.0f);
+			lflipper = m_world->CreateBody(&bd);
+			lflipper->CreateFixture(&boxFixtureDef);
+		}
+		{
+			b2PolygonShape boxShape;
+			boxShape.SetAsBox(2.5,0.2);
+		    b2FixtureDef boxFixtureDef;
+		    boxFixtureDef.shape = &boxShape;	
+			boxFixtureDef.density=5.0f;			
+			b2BodyDef bd;
+			bd.type = b2_dynamicBody;
+			bd.angle = 30* DEGTORAD;
+			bd.position.Set(3.0f, 8.0f);
+			rflipper = m_world->CreateBody(&bd);
+			rflipper->CreateFixture(&boxFixtureDef);
+		}
+		
+		{
+		//the motorised joint
+		b2RevoluteJointDef revoluteJointDef;
+		revoluteJointDef.bodyA = lflipstatd;
+		revoluteJointDef.bodyB = lflipper;
+		revoluteJointDef.collideConnected = false;
+		revoluteJointDef.localAnchorB.Set(-2.5,0);
+	
+		revoluteJointDef.localAnchorA.Set(3.5,0);
+		revoluteJointDef.enableLimit = true;
+		revoluteJointDef.lowerAngle = -15 * DEGTORAD;
+		revoluteJointDef.upperAngle =  20 * DEGTORAD;
+		revoluteJointDef.enableMotor = true;
+		revoluteJointDef.motorSpeed = 3;
+		revoluteJointDef.maxMotorTorque = 100.0f;
+		//revoluteJointDef.motorSpeed = -90 * DEGTORAD;//90 degrees per second
+		lflip = (b2RevoluteJoint*)m_world->CreateJoint( &revoluteJointDef );
+		}
+		{
+		//the motorised joint
+		b2RevoluteJointDef revoluteJointDef;
+		revoluteJointDef.bodyA = rflipstatd;
+		revoluteJointDef.bodyB = rflipper;
+		revoluteJointDef.collideConnected = false;
+		revoluteJointDef.localAnchorB.Set(2.5,0);
+	
+		revoluteJointDef.localAnchorA.Set(-3.5,0);
+		revoluteJointDef.enableLimit = true;
+		revoluteJointDef.lowerAngle = -15 * DEGTORAD;
+		revoluteJointDef.upperAngle =  20 * DEGTORAD;
+		revoluteJointDef.enableMotor = true;
+		revoluteJointDef.motorSpeed = -3;
+		revoluteJointDef.maxMotorTorque = 100.0f;
+		//revoluteJointDef.motorSpeed = -90 * DEGTORAD;//90 degrees per second
+		rflip = (b2RevoluteJoint*)m_world->CreateJoint( &revoluteJointDef );
+		}
+		
+	
+		
 
 	}
 	
@@ -118,11 +221,26 @@ namespace cs296
     {
         switch (key)
 		{
-		
+			case 'a':
+			lflipper->ApplyAngularImpulse(2000.0f,true); 
+			break;
+			case 'd':
+			rflipper->ApplyAngularImpulse(-2000.0f,true); 
+			break;
 			
 	
 		}
     }
+    
+    //~ void dominos_t::keyboardUp(unsigned char key)
+    //~ {
+        //~ switch (key) 
+        //~ {
+        //~ case 'a':
+				//~ lflip->SetMotorSpeed(-3.0);
+				//~ break;
+        //~ }
+    //~ }
 
   
   

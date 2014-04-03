@@ -40,35 +40,24 @@ namespace cs296
   {
   public:
     dominos_t();
-	void Step()
-	{
-		if (m_button)
-		{
-			m_leftJoint->SetMotorSpeed(20.0f);
-			m_rightJoint->SetMotorSpeed(-20.0f);
-		}
-		else
-		{
-			m_leftJoint->SetMotorSpeed(-10.0f);
-			m_rightJoint->SetMotorSpeed(10.0f);
-		}
-
 	
-		
-
-	}
-      
+	b2Body* lflipstatv;
+	b2Body* lflipstatd;
+	b2Body* rflipstatv;
+	b2Body* rflipstatd;
+	b2Body* lflipper;
+	b2Body* rflipper;
+	b2Body* rightsep;
+	b2RevoluteJoint* lflip;
+	b2RevoluteJoint* rflip;
     void keyboard(unsigned char key);
-    //void keyboardUp(unsigned char key);
+    void keyboardUp(unsigned char key);
 	static base_sim_t* create()
 	{
 		return new dominos_t;
 	}
 	
-	b2RevoluteJoint* m_leftJoint;
-	b2RevoluteJoint* m_rightJoint;
-	b2Body* m_ball;
-	bool m_button;
+	
   };
 }
   

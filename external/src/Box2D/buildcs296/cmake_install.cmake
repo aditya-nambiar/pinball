@@ -1,4 +1,4 @@
-# Install script for directory: /Users/aditya/Desktop/project/external/src/Box2D
+# Install script for directory: /Users/aditya/Desktop/pinball/external/src/Box2D
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -29,7 +29,7 @@ ENDIF(NOT CMAKE_INSTALL_COMPONENT)
 
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  INCLUDE("/Users/aditya/Desktop/project/external/src/Box2D/buildcs296/Box2D/cmake_install.cmake")
+  INCLUDE("/Users/aditya/Desktop/pinball/external/src/Box2D/buildcs296/Box2D/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 
@@ -39,7 +39,7 @@ ELSE(CMAKE_INSTALL_COMPONENT)
   SET(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 ENDIF(CMAKE_INSTALL_COMPONENT)
 
-FILE(WRITE "/Users/aditya/Desktop/project/external/src/Box2D/buildcs296/${CMAKE_INSTALL_MANIFEST}" "")
+FILE(WRITE "/Users/aditya/Desktop/pinball/external/src/Box2D/buildcs296/${CMAKE_INSTALL_MANIFEST}" "")
 FOREACH(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  FILE(APPEND "/Users/aditya/Desktop/project/external/src/Box2D/buildcs296/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+  FILE(APPEND "/Users/aditya/Desktop/pinball/external/src/Box2D/buildcs296/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
 ENDFOREACH(file)
