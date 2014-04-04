@@ -30,8 +30,13 @@
 #define RADTODEG 57.295779513082320876f
 #endif
 #include <iostream>
+
+#include <stdint.h>
+#include <inttypes.h>
+#include <math.h>
 //structure to store current surface velocity of a fixture
 b2PrismaticJoint* up;
+b2Body* ball;
 namespace cs296
 {
   //! This is the class that sets up the Box2D simulation world
@@ -48,10 +53,19 @@ namespace cs296
          //check if fixture A was a ball
 		     void *yo= contact->GetFixtureA()->GetBody()->GetUserData();
    			 void *lo= contact->GetFixtureB()->GetBody()->GetUserData();
-   		     if (lo&&yo){
-   		     	up->SetMotorSpeed(2.5f);
-				std::cout<<"dsfd\n";
+			 int a =*((int*)(&yo));
+			 int b=*((int*)(&lo));
+   		     if (*((int*)(&yo))==109){
+   		     	ball->SetLinearVelocity(b2Vec2(0,0));
+				up->SetMotorSpeed(2.5f);
+				for( long i=0; i<pow(10,8); i++){}
    		     }
+			 if(a==103 || a==104){
+				 std::cout<<"awesome\n";
+		 }
+		 if(a==108 || b==108){
+			 ball->SetLinearVelocity(b2Vec2(4,0));
+		 }
 			 
        }
   
@@ -59,11 +73,16 @@ namespace cs296
   
 	         void *yo= contact->GetFixtureA()->GetBody()->GetUserData();
  			 void *lo= contact->GetFixtureB()->GetBody()->GetUserData();
- 		     if (lo&&yo){
-				 std:cout<<"DSf\n";
+			 int a =*((int*)(&yo));
+			 int b=*((int*)(&lo));
+ 		     if (a==109){
+ 				 for( long i=0; i<pow(10,8); i++){}
  		     	up->SetMotorSpeed(-2.5f);
-			
+ 			
  		     }
+			 if(a==108 || b==108){
+				 ball->SetLinearVelocity(b2Vec2(.2,.2));
+			 }
        }
      };
   class dominos_t : public base_sim_t
@@ -80,7 +99,7 @@ namespace cs296
 	b2Body* rightsep1;
 	b2Body* rightsep2;
 	b2Body* launcher;
-	b2Body* ball;
+	
 	b2Body* stopper;
 	b2Body* temp2;
 	b2Body* temp1;

@@ -42,6 +42,30 @@ namespace cs296
   /**  The is the constructor 
    * This is the documentation block for the constructor.
    */ 
+	
+	/*
+	 ground            100
+     lflipstatv		   102
+	 lflipstatd;	   112
+	 rflipstatv;       113
+	 rflipstatd;       114
+	 lflipper;         120
+	 rflipper;         117
+	 rightsep1;        105
+	 rightsep2;        106
+	 launcher;         111
+	 ball;             118
+	 stopper;          110
+     temp2;            
+	 temp1;            116
+	 temp;             115
+	 horz;             108
+	 hormov;           107
+	 vermov;           109
+	 triangle1;        103
+	 triangle2;        104
+	
+	*/
   dominos_t::dominos_t()
     {		
 		//MyContactListener myContactListenerInstance;
@@ -64,6 +88,8 @@ namespace cs296
 			b2FixtureDef fd;
 			fd.shape = &loop;
 			fd.density = 0.0f;
+			int myint=100;
+			ground->SetUserData((void*)myint);
 			ground->CreateFixture(&fd);
 		}
 		
@@ -90,6 +116,8 @@ namespace cs296
 
 		shape.SetAsBox(0.01, 3, b2Vec2(0,0), 0.8);
 		body->CreateFixture(&shape, density);
+		int myint=101;
+		body->SetUserData((void*)myint);
 
 		}
 
@@ -129,6 +157,8 @@ namespace cs296
 			b2BodyDef bd;
 			bd.position.Set(-12.0f, 9.0f);
 			lflipstatv = m_world->CreateBody(&bd);
+			int myint=102;
+			lflipstatv->SetUserData((void*)myint);
 			lflipstatv->CreateFixture(&fd);
 		}
 		//left triangle
@@ -150,6 +180,8 @@ namespace cs296
 		
 			bd.position.Set(-6.0f, 9.0f);
 			triangle1 = m_world->CreateBody(&bd);
+			int myint=103;
+			triangle1->SetUserData((void*)myint);
 			triangle1->CreateFixture(&fd);
 		}
 		//right triangle
@@ -170,6 +202,8 @@ namespace cs296
 			b2BodyDef bd;
 			bd.position.Set(6.0f, 9.0f);
 			triangle2 = m_world->CreateBody(&bd);
+			int myint=104;
+			triangle2->SetUserData((void*)myint);
 			triangle2->CreateFixture(&fd);
 		}
 		//top right seperator , makes way for new ball
@@ -183,6 +217,8 @@ namespace cs296
 				bd.angle = 0* DEGTORAD;
 				bd.position.Set(13.0f, 18.0f);
 				rightsep1= m_world->CreateBody(&bd);
+				int myint=105;
+				rightsep1->SetUserData((void*)myint);
 				rightsep1->CreateFixture(&boxFixtureDef);
 			
 		}
@@ -190,13 +226,15 @@ namespace cs296
 		{
 			
 				b2PolygonShape boxShape;
-				boxShape.SetAsBox(0.2,3.5);
+				boxShape.SetAsBox(0.2,3.1);
 			    b2FixtureDef boxFixtureDef;
 			    boxFixtureDef.shape = &boxShape;			
 				b2BodyDef bd;
 				bd.angle = 0* DEGTORAD;
-				bd.position.Set(13.0f, 3.3f);
+				bd.position.Set(13.0f, 3.1f);
 				rightsep2= m_world->CreateBody(&bd);
+				int myint=106;
+				rightsep2->SetUserData((void*)myint);
 				rightsep2->CreateFixture(&boxFixtureDef);
 			
 		}
@@ -212,6 +250,8 @@ namespace cs296
 				bd.angle = 0* DEGTORAD;
 				bd.position.Set(-14.5f, 1.8f);
 				hormov= m_world->CreateBody(&bd);
+				int myint=107;
+				hormov->SetUserData((void*)myint);
 				hormov->CreateFixture(&boxFixtureDef);
 			
 		}
@@ -226,6 +266,8 @@ namespace cs296
 				bd.angle = 90* DEGTORAD;
 				bd.position.Set(-2.0f, 1.0f);
 				horz= m_world->CreateBody(&bd);
+				int myint=108;
+				horz->SetUserData((void*)myint);
 				horz->CreateFixture(&boxFixtureDef);
 			
 		}
@@ -235,16 +277,19 @@ namespace cs296
 				b2PolygonShape boxShape;
 				boxShape.SetAsBox(0.2,0.95);
 			    b2FixtureDef boxFixtureDef;
-			    boxFixtureDef.shape = &boxShape;			
+			    boxFixtureDef.shape = &boxShape;	
+				boxFixtureDef.restitution=0;
 				b2BodyDef bd;
-				int myint=111;
+				
 				//void * tp= &myint;
                 //vermov->SetUserData(this);
 				bd.type = b2_dynamicBody;
-				bd.angle = 84* DEGTORAD;
+				bd.angle = 80* DEGTORAD;
 				bd.position.Set(11.70f, 0.5f);
 				vermov= m_world->CreateBody(&bd);
-				vermov->SetUserData((void*)111);
+				int myint=109;
+				vermov->SetUserData((void*)myint);
+				
 				vermov->CreateFixture(&boxFixtureDef);
 			
 		}
@@ -257,8 +302,10 @@ namespace cs296
 			    boxFixtureDef.shape = &boxShape;			
 				b2BodyDef bd;
 				bd.angle = 0* DEGTORAD;
-				bd.position.Set(13.2f, 6.0f);
+				bd.position.Set(13.2f, 5.5f);
 				stopper= m_world->CreateBody(&bd);
+				int myint=110;
+				stopper->SetUserData((void*)myint);
 				stopper->CreateFixture(&boxFixtureDef);
 			
 		}
@@ -275,6 +322,8 @@ namespace cs296
 				bd.angle = 0* DEGTORAD;
 				bd.position.Set(13.8f, 5.0f);
 				launcher= m_world->CreateBody(&bd);
+				int myint=111;
+				launcher->SetUserData((void*)myint);
 				launcher->CreateFixture(&boxFixtureDef);
 			
 		}
@@ -288,6 +337,8 @@ namespace cs296
 			bd.angle = -20* DEGTORAD;
 			bd.position.Set(-9.5f, 8.0f);
 			lflipstatd = m_world->CreateBody(&bd);
+			int myint=112;
+			lflipstatd->SetUserData((void*)myint);
 			lflipstatd->CreateFixture(&boxFixtureDef);
 		}
 		//vertical part of right thing not in touch with flipper
@@ -309,6 +360,8 @@ namespace cs296
 			b2BodyDef bd;
 			bd.position.Set(12.0f, 8.9f);
 			rflipstatv = m_world->CreateBody(&bd);
+			int myint=113;
+			rflipstatv->SetUserData((void*)myint);
 			rflipstatv->CreateFixture(&fd);
 		}
 		//diagnol part of right thing in touch with flipper
@@ -321,6 +374,8 @@ namespace cs296
 			bd.angle = 20* DEGTORAD;
 			bd.position.Set(9.0f, 8.0f);
 			rflipstatd = m_world->CreateBody(&bd);
+			int myint=114;
+			rflipstatd->SetUserData((void*)myint);
 			rflipstatd->CreateFixture(&boxFixtureDef);
 		}
 		//right top so that ball comes to main area
@@ -333,6 +388,8 @@ namespace cs296
 			bd.angle = -60* DEGTORAD;
 			bd.position.Set(13.0f, 36.0f);
 			temp = m_world->CreateBody(&bd);
+			int myint=115;
+			temp->SetUserData((void*)myint);
 			temp->CreateFixture(&boxFixtureDef);
 		}
 		//left guard so that ball doesnt drop
@@ -345,6 +402,8 @@ namespace cs296
 			bd.angle = -60* DEGTORAD;
 			bd.position.Set(-13.5f, 18.0f);
 			temp1 = m_world->CreateBody(&bd);
+			int myint=116;
+			temp1->SetUserData((void*)myint);
 			temp1->CreateFixture(&boxFixtureDef);
 			
 			
@@ -363,6 +422,8 @@ namespace cs296
 			bd.angle = -30* DEGTORAD;
 			bd.position.Set(-3.0f, 7.0f);
 			lflipper = m_world->CreateBody(&bd);
+			int myint=120;
+			lflipper->SetUserData((void*)myint);
 			lflipper->CreateFixture(&boxFixtureDef);
 		}
 		//right flipper
@@ -377,6 +438,8 @@ namespace cs296
 			bd.angle = 30* DEGTORAD;
 			bd.position.Set(3.0f, 7.0f);
 			rflipper = m_world->CreateBody(&bd);
+			int myint=117;
+			rflipper->SetUserData((void*)myint);
 			rflipper->CreateFixture(&boxFixtureDef);
 		}
 		//ball
@@ -400,6 +463,8 @@ namespace cs296
 		   
 			ball= m_world->CreateBody(&bd);
 			ball->SetUserData(this);
+			int myint=118;
+			ball->SetUserData((void*)myint);
 		    ball->CreateFixture(&fixtureDef);
 		}
 		//left flipper joint
@@ -470,7 +535,7 @@ namespace cs296
 		  prismaticJointDef.localAnchorA.Set( -1.2,0);//a little outside the bottom right corner
 		  prismaticJointDef.localAnchorB.Set( -.5,0);//bottom left corner
 		  prismaticJointDef.enableLimit = true;
-		  prismaticJointDef.lowerTranslation = -12.0;
+		  prismaticJointDef.lowerTranslation = -13.0;
 		  prismaticJointDef.upperTranslation = 3.0;
 		  prismaticJointDef.enableMotor = true;
 		  prismaticJointDef.maxMotorForce = 10000;
