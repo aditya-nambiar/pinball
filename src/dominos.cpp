@@ -44,7 +44,10 @@ namespace cs296
    */ 
   dominos_t::dominos_t()
     {		
-		
+		//MyContactListener myContactListenerInstance;
+  
+		  //in FooTest constructor
+		m_world->SetContactListener(&myContactListenerInstance);
 		b2Body* ground = NULL;
 		{
 			b2BodyDef bd;
@@ -64,6 +67,50 @@ namespace cs296
 			ground->CreateFixture(&fd);
 		}
 		
+		//Spinner
+		{
+			b2Body* body;
+		{
+		b2BodyDef bDef;
+		bDef.type = b2_dynamicBody;
+		bDef.position = b2Vec2(0, 15);
+		body = m_world->CreateBody(&bDef);
+
+		b2PolygonShape shape;
+		const float32 density = 10;
+
+		shape.SetAsBox(3, 0.01);
+		body->CreateFixture(&shape, density);
+
+		shape.SetAsBox(0.01, 3, b2Vec2(0,0), 0);
+		body->CreateFixture(&shape, density);
+
+		shape.SetAsBox(3, 0.01, b2Vec2(0,0), 0.8);
+		body->CreateFixture(&shape, density);
+
+		shape.SetAsBox(0.01, 3, b2Vec2(0,0), 0.8);
+		body->CreateFixture(&shape, density);
+
+		}
+
+		b2Body* b4;
+		      {
+			b2PolygonShape shape;
+			shape.SetAsBox(0.025f, 0.025f);
+	  
+			b2BodyDef bd;
+			bd.position.Set(0, 15);
+			b4 = m_world->CreateBody(&bd);
+			b4->CreateFixture(&shape, 3.0f);
+		      }
+	
+		      b2RevoluteJointDef jd;
+		      b2Vec2 anchor;
+		      anchor.Set(0.0f, 15.0f);
+		      jd.Initialize(body, b4, anchor);
+		      m_world->CreateJoint(&jd);
+		}
+		//vertical part of left thing not in touch with flipper
 		{
 			b2PolygonShape shp;
 			b2Vec2 vertices[4];
@@ -84,6 +131,7 @@ namespace cs296
 			lflipstatv = m_world->CreateBody(&bd);
 			lflipstatv->CreateFixture(&fd);
 		}
+		//left triangle
 		{
 			b2PolygonShape shp;
 			b2Vec2 vertices[3];
@@ -99,10 +147,12 @@ namespace cs296
 			fd.density = 5.0f;
 			fd.restitution=1.8;
 			b2BodyDef bd;
+		
 			bd.position.Set(-6.0f, 9.0f);
 			triangle1 = m_world->CreateBody(&bd);
 			triangle1->CreateFixture(&fd);
 		}
+		//right triangle
 		{
 			b2PolygonShape shp;
 			b2Vec2 vertices[3];
@@ -122,6 +172,7 @@ namespace cs296
 			triangle2 = m_world->CreateBody(&bd);
 			triangle2->CreateFixture(&fd);
 		}
+		//top right seperator , makes way for new ball
 		{
 			
 				b2PolygonShape boxShape;
@@ -130,11 +181,12 @@ namespace cs296
 			    boxFixtureDef.shape = &boxShape;			
 				b2BodyDef bd;
 				bd.angle = 0* DEGTORAD;
-				bd.position.Set(13.0f, 9.0f);
+				bd.position.Set(13.0f, 18.0f);
 				rightsep1= m_world->CreateBody(&bd);
 				rightsep1->CreateFixture(&boxFixtureDef);
 			
 		}
+		//bottom right seperator , seperates launcher from main body
 		{
 			
 				b2PolygonShape boxShape;
@@ -143,11 +195,12 @@ namespace cs296
 			    boxFixtureDef.shape = &boxShape;			
 				b2BodyDef bd;
 				bd.angle = 0* DEGTORAD;
-				bd.position.Set(13.0f, 2.7f);
+				bd.position.Set(13.0f, 3.3f);
 				rightsep2= m_world->CreateBody(&bd);
 				rightsep2->CreateFixture(&boxFixtureDef);
 			
 		}
+		//point that moves on the horizontal plank
 		{
 			
 				b2PolygonShape boxShape;
@@ -162,6 +215,7 @@ namespace cs296
 				hormov->CreateFixture(&boxFixtureDef);
 			
 		}
+		//horizontal plank on the bottom 
 		{
 			
 				b2PolygonShape boxShape;
@@ -175,6 +229,7 @@ namespace cs296
 				horz->CreateFixture(&boxFixtureDef);
 			
 		}
+		//tilted plank to lift ball back to new position--------id 111
 		{
 			
 				b2PolygonShape boxShape;
@@ -182,13 +237,18 @@ namespace cs296
 			    b2FixtureDef boxFixtureDef;
 			    boxFixtureDef.shape = &boxShape;			
 				b2BodyDef bd;
+				int myint=111;
+				//void * tp= &myint;
+                //vermov->SetUserData(this);
 				bd.type = b2_dynamicBody;
-				bd.angle = 85* DEGTORAD;
+				bd.angle = 84* DEGTORAD;
 				bd.position.Set(11.70f, 0.5f);
 				vermov= m_world->CreateBody(&bd);
+				vermov->SetUserData((void*)111);
 				vermov->CreateFixture(&boxFixtureDef);
 			
 		}
+		//stopper to stop launcher from flying of
 		{
 			
 				b2PolygonShape boxShape;
@@ -202,6 +262,7 @@ namespace cs296
 				stopper->CreateFixture(&boxFixtureDef);
 			
 		}
+		//launcher to launch ball
 		{
 			
 				b2PolygonShape boxShape;
@@ -217,6 +278,7 @@ namespace cs296
 				launcher->CreateFixture(&boxFixtureDef);
 			
 		}
+		//diagnol part of left thing in touch with flipper
 		{
 			b2PolygonShape boxShape;
 			boxShape.SetAsBox(3.5,0.4);
@@ -228,6 +290,7 @@ namespace cs296
 			lflipstatd = m_world->CreateBody(&bd);
 			lflipstatd->CreateFixture(&boxFixtureDef);
 		}
+		//vertical part of right thing not in touch with flipper
 		{
 			b2PolygonShape shp;
 			b2Vec2 vertices[4];
@@ -248,6 +311,7 @@ namespace cs296
 			rflipstatv = m_world->CreateBody(&bd);
 			rflipstatv->CreateFixture(&fd);
 		}
+		//diagnol part of right thing in touch with flipper
 		{
 			b2PolygonShape boxShape;
 			boxShape.SetAsBox(3.5,0.4);
@@ -259,6 +323,7 @@ namespace cs296
 			rflipstatd = m_world->CreateBody(&bd);
 			rflipstatd->CreateFixture(&boxFixtureDef);
 		}
+		//right top so that ball comes to main area
 		{
 			b2PolygonShape boxShape;
 			boxShape.SetAsBox(4.5,0.2);
@@ -270,6 +335,7 @@ namespace cs296
 			temp = m_world->CreateBody(&bd);
 			temp->CreateFixture(&boxFixtureDef);
 		}
+		//left guard so that ball doesnt drop
 		{
 			b2PolygonShape boxShape;
 			boxShape.SetAsBox(2.6,0.2);
@@ -284,7 +350,7 @@ namespace cs296
 			
 			
 		}
-	
+		// left flipper
 		{
 			b2PolygonShape boxShape;
 			boxShape.SetAsBox(3.0,0.4);
@@ -299,6 +365,7 @@ namespace cs296
 			lflipper = m_world->CreateBody(&bd);
 			lflipper->CreateFixture(&boxFixtureDef);
 		}
+		//right flipper
 		{
 			b2PolygonShape boxShape;
 			boxShape.SetAsBox(3.0,0.4);
@@ -312,6 +379,7 @@ namespace cs296
 			rflipper = m_world->CreateBody(&bd);
 			rflipper->CreateFixture(&boxFixtureDef);
 		}
+		//ball
 		{
 			
 		    b2BodyDef bd;
@@ -331,8 +399,10 @@ namespace cs296
 		    fixtureDef.restitution = 0.2f;
 		   
 			ball= m_world->CreateBody(&bd);
+			ball->SetUserData(this);
 		    ball->CreateFixture(&fixtureDef);
 		}
+		//left flipper joint
 		{
 		//the motorised joint
 		b2RevoluteJointDef revoluteJointDef;
@@ -351,6 +421,7 @@ namespace cs296
 		//revoluteJointDef.motorSpeed = -90 * DEGTORAD;//90 degrees per second
 		lflip = (b2RevoluteJoint*)m_world->CreateJoint( &revoluteJointDef );
 		}
+		//right flipper joint
 		{
 		//the motorised joint
 		b2RevoluteJointDef revoluteJointDef;
@@ -369,7 +440,7 @@ namespace cs296
 		//revoluteJointDef.motorSpeed = -90 * DEGTORAD;//90 degrees per second
 		rflip = (b2RevoluteJoint*)m_world->CreateJoint( &revoluteJointDef );
 		}
-		
+		//prismatic joint b/w horizontal bar and point
 	    {
 	    	
 			
@@ -387,6 +458,7 @@ namespace cs296
 		  prismaticJointDef.maxMotorForce = 10000000;
 		 right= (b2PrismaticJoint*)m_world->CreateJoint( &prismaticJointDef );
 	    }
+		//prismatic joint b/w tilt and right seperator
 	    {
 	    	
 			

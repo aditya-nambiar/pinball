@@ -29,18 +29,48 @@
 #define DEGTORAD 0.0174532925199432957f
 #define RADTODEG 57.295779513082320876f
 #endif
-
+#include <iostream>
 //structure to store current surface velocity of a fixture
-
+b2PrismaticJoint* up;
 namespace cs296
 {
   //! This is the class that sets up the Box2D simulation world
   //! Notice the public inheritance - why do we inherit the base_sim_t class?
+
+
+    class MyContactListener : public b2ContactListener
+     {
+	 public:
+		 int i;
+		void MycontactListener(){i=0;}
+       void BeginContact(b2Contact* contact) {
+  
+         //check if fixture A was a ball
+		     void *yo= contact->GetFixtureA()->GetBody()->GetUserData();
+   			 void *lo= contact->GetFixtureB()->GetBody()->GetUserData();
+   		     if (lo&&yo){
+   		     	up->SetMotorSpeed(2.5f);
+				std::cout<<"dsfd\n";
+   		     }
+			 
+       }
+  
+       void EndContact(b2Contact* contact) {
+  
+	         void *yo= contact->GetFixtureA()->GetBody()->GetUserData();
+ 			 void *lo= contact->GetFixtureB()->GetBody()->GetUserData();
+ 		     if (lo&&yo){
+				 std:cout<<"DSf\n";
+ 		     	up->SetMotorSpeed(-2.5f);
+			
+ 		     }
+       }
+     };
   class dominos_t : public base_sim_t
   {
   public:
     dominos_t();
-	
+    MyContactListener myContactListenerInstance;
 	b2Body* lflipstatv;
 	b2Body* lflipstatd;
 	b2Body* rflipstatv;
@@ -63,7 +93,7 @@ namespace cs296
 	b2RevoluteJoint* lflip;
 	b2RevoluteJoint* rflip;
 	b2PrismaticJoint* right;
-	b2PrismaticJoint* up;
+	
     void keyboard(unsigned char key);
     void keyboardUp(unsigned char key);
 	static base_sim_t* create()
