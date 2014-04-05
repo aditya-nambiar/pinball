@@ -183,8 +183,11 @@ void base_sim_t::step(settings_t* settings)
 	  ave_profile.solveTOI = scale * m_total_profile.solveTOI;
 	  ave_profile.broadphase = scale * m_total_profile.broadphase;
 	}
-      
-      m_debug_draw.DrawString(5, m_text_line, "step [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.step, ave_profile.step, m_max_profile.step);
+       //  m_debug_draw.DrawString(5,m_text_line,"SCORE");
+	
+		   m_debug_draw.DrawString(5,m_text_line,"Score : %3d",score);
+		 
+	/*  m_debug_draw.DrawString(5, m_text_line, "step [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.step, ave_profile.step, m_max_profile.step);
       m_text_line += 15;
       m_debug_draw.DrawString(5, m_text_line, "collide [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.collide, ave_profile.collide, m_max_profile.collide);
       m_text_line += 15;
@@ -199,7 +202,7 @@ void base_sim_t::step(settings_t* settings)
       m_debug_draw.DrawString(5, m_text_line, "solveTOI [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.solveTOI, ave_profile.solveTOI, m_max_profile.solveTOI);
       m_text_line += 15;
       m_debug_draw.DrawString(5, m_text_line, "broad-phase [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.broadphase, ave_profile.broadphase, m_max_profile.broadphase);
-      m_text_line += 15;
+      m_text_line += 15;*/
     }
     
   if (settings->draw_contact_points)

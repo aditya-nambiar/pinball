@@ -37,12 +37,13 @@
 //structure to store current surface velocity of a fixture
 b2PrismaticJoint* up;
 b2Body* ball;
+
 namespace cs296
 {
   //! This is the class that sets up the Box2D simulation world
   //! Notice the public inheritance - why do we inherit the base_sim_t class?
-
-
+    ///int scoremax=0;
+   
     class MyContactListener : public b2ContactListener
      {
 	 public:
@@ -58,10 +59,11 @@ namespace cs296
    		     if (*((int*)(&yo))==109){
    		     	ball->SetLinearVelocity(b2Vec2(0,0));
 				up->SetMotorSpeed(2.5f);
+				std::cout<<"enter\n";
 				for( long i=0; i<pow(10,8); i++){}
    		     }
 			 if(a==103 || a==104){
-				 std::cout<<"awesome\n";
+				 score+=15;
 		 }
 		 if(a==108 || b==108){
 			 ball->SetLinearVelocity(b2Vec2(4,0));
@@ -78,6 +80,7 @@ namespace cs296
  		     if (a==109){
  				 for( long i=0; i<pow(10,8); i++){}
  		     	up->SetMotorSpeed(-2.5f);
+				std::cout<<"exit\n";
  			
  		     }
 			 if(a==108 || b==108){
@@ -116,7 +119,7 @@ namespace cs296
     void keyboard(unsigned char key);
     void keyboardUp(unsigned char key);
 	static base_sim_t* create()
-	{
+	{     
 		return new dominos_t;
 	}
 	

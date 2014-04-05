@@ -26,6 +26,7 @@
 
 namespace cs296
 {
+//extern int32 score ;
   class callbacks_t
   {
   public:

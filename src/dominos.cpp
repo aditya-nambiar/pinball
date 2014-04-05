@@ -42,7 +42,7 @@ namespace cs296
   /**  The is the constructor 
    * This is the documentation block for the constructor.
    */ 
-	
+	int32 score;
 	/*
 	 ground            100
      lflipstatv		   102

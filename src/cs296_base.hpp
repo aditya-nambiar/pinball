@@ -34,7 +34,8 @@
 
 namespace cs296
 {
-
+//int32 wer=0;
+	extern int32 score;
   //! What is the difference between a class and a struct in C++?
   class base_sim_t;
   struct settings_t;
@@ -90,6 +91,7 @@ namespace cs296
     int32 enable_sub_stepping;
     int32 pause;
     int32 single_step;
+	
   };
   
   struct sim_t
@@ -119,7 +121,7 @@ namespace cs296
   public:
     
     base_sim_t();
-
+    //static int32 score;
     //! Virtual destructors - amazing objects. Why are these necessary?
     virtual ~base_sim_t();
     
