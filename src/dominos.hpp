@@ -49,60 +49,63 @@ bool killball;
 bool smallkaro;
 b2Body* ball;
 b2Body* reflector;
+b2Body* ballreleaser;
   //! This is the class that sets up the Box2D simulation world
   //! Notice the public inheritance - why do we inherit the base_sim_t class?
     ///int scoremax=0;
    
-    class MyContactListener : public b2ContactListener
-     {
+class MyContactListener : public b2ContactListener{
+
 public:
 int i;
 void MycontactListener(){i=0;}
-       void BeginContact(b2Contact* contact) {
-  
-         //check if fixture A was a ball
-void *yo= contact->GetFixtureA()->GetBody()->GetUserData();
-    void *lo= contact->GetFixtureB()->GetBody()->GetUserData();
-int a =*((int*)(&yo));
-int b=*((int*)(&lo));
-    if (*((int*)(&yo))==109){
-    ball->SetLinearVelocity(b2Vec2(0,0));
-up->SetMotorSpeed(2.5f);
-std::cout<<"enter\n";
-for( long i=0; i<pow(10,8); i++){}
-    }
-if(a==103 || a==104){
-score+=15;
-}
-if(a==201 || b==201){
-killball = true;
-}
-if(a==108 || b==108){
-ball->SetLinearVelocity(b2Vec2(4,0));
-}
-if(a==200 || b==200){
-smallkaro = true;
-}
 
-       }
-  
-       void EndContact(b2Contact* contact) {
-  
-void *yo= contact->GetFixtureA()->GetBody()->GetUserData();
-  void *lo= contact->GetFixtureB()->GetBody()->GetUserData();
-int a =*((int*)(&yo));
-int b=*((int*)(&lo));
-  if (a==109){
-  for( long i=0; i<pow(10,8); i++){}
-  up->SetMotorSpeed(-2.5f);
-std::cout<<"exit\n";
- 
-  }
-if(a==108 || b==108){
-ball->SetLinearVelocity(b2Vec2(.2,.2));
+void BeginContact(b2Contact* contact) {//check if fixture A was a ball
+          
+	void *yo= contact->GetFixtureA()->GetBody()->GetUserData();
+	void *lo= contact->GetFixtureB()->GetBody()->GetUserData();
+	int a=*((int*)(&yo));
+	int b=*((int*)(&lo));
+	if (*((int*)(&yo))==109){
+		ball->SetLinearVelocity(b2Vec2(0,0));
+		up->SetMotorSpeed(2.5f);
+		std::cout<<"enter\n";
+		for( long i=0; i<pow(10,8); i++){}
+		}
+	if(a==103 || a==104){
+	score+=15;
+	}
+	if(a==201 || b==201){
+	std::cout << "done\n";
+	killball = true;	
+	}
+	if(a==108 || b==108){
+	ball->SetLinearVelocity(b2Vec2(4,0));
+	}
+	if(a==200 || b==200){
+	smallkaro = true;
+	}
 }
-       }
-     };
+  
+void EndContact(b2Contact* contact) {
+  
+	void *yo= contact->GetFixtureA()->GetBody()->GetUserData();
+	void *lo= contact->GetFixtureB()->GetBody()->GetUserData();
+	int a =*((int*)(&yo));
+	int b=*((int*)(&lo));
+	if (a==109){
+		for( long i=0; i<pow(10,8); i++){}
+		up->SetMotorSpeed(-2.5f);
+		std::cout<<"exit\n";
+		}
+	if(a==108 || b==108){
+	ball->SetLinearVelocity(b2Vec2(.2,.2));
+	}
+ }
+};
+
+
+
   class dominos_t : public base_sim_t
   {
   public:

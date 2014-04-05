@@ -125,7 +125,7 @@ time_step = 0.0f;
 	  for(long i=0; i<10000000000; i++){}
 	  b2BodyDef bd;
 bd.type = b2_dynamicBody;
-bd.position.Set(-5, 30);
+bd.position.Set(-12, 39);
 
 b2CircleShape circle;
 circle.m_radius = 0.54f;
@@ -141,6 +141,7 @@ ball->SetUserData(this);
 int myint=118;
 ball->SetUserData((void*)myint);
 ball->CreateFixture(&fixtureDef);
+ball->SetLinearVelocity(b2Vec2(7,-7));
   }
   if(smallkaro){
 	  b2CircleShape* circle = (b2CircleShape*)reflector->GetFixtureList()->GetShape();
@@ -150,7 +151,7 @@ ball->CreateFixture(&fixtureDef);
   }
   if(!smallkaro && cnt >=0){
 	  cnt++;
-	  if(cnt==2){
+	  if(cnt==10){
 		  cnt = -1;
 		  b2CircleShape* circle = (b2CircleShape*)reflector->GetFixtureList()->GetShape();
 		  circle->m_radius=1.0f;
