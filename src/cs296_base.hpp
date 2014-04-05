@@ -2,7 +2,7 @@
 * Copyright (c) 2006-2009 Erin Catto http://www.box2d.org
 *
 * This software is provided 'as-is', without any express or implied
-* warranty.  In no event will the authors be held liable for any damages
+* warranty. In no event will the authors be held liable for any damages
 * arising from the use of this software.
 * Permission is granted to anyone to use this software for any purpose,
 * including commercial applications, and to alter it and redistribute it
@@ -16,11 +16,11 @@
 * 3. This notice may not be removed or altered from any source distribution.
 */
 
-/* 
- * Base code for CS 296 Software Systems Lab 
- * Department of Computer Science and Engineering, IIT Bombay
- * Instructor: Parag Chaudhuri
- */
+/*
+* Base code for CS 296 Software Systems Lab
+* Department of Computer Science and Engineering, IIT Bombay
+* Instructor: Parag Chaudhuri
+*/
 
 
 #ifndef _CS296BASE_HPP_
@@ -30,18 +30,22 @@
 #include <Box2D/Box2D.h>
 #include <cstdlib>
 
-#define	RAND_LIMIT 32767
+#define RAND_LIMIT 32767
 
 namespace cs296
 {
 //int32 wer=0;
-	extern int32 score;
+extern int32 score;
+extern bool killball;
+extern bool smallkaro;
+extern b2Body* ball;
+extern b2Body* reflector;
   //! What is the difference between a class and a struct in C++?
   class base_sim_t;
   struct settings_t;
   
   //! Why do we use a typedef
-  typedef base_sim_t* sim_create_fcn(); 
+  typedef base_sim_t* sim_create_fcn();
 
   //! Simulation settings. Some can be controlled in the GUI.
   struct settings_t
@@ -91,7 +95,7 @@ namespace cs296
     int32 enable_sub_stepping;
     int32 pause;
     int32 single_step;
-	
+
   };
   
   struct sim_t
@@ -99,14 +103,14 @@ namespace cs296
     const char *name;
     sim_create_fcn *create_fcn;
 
-    sim_t(const char *_name, sim_create_fcn *_create_fcn): 
+    sim_t(const char *_name, sim_create_fcn *_create_fcn):
       name(_name), create_fcn(_create_fcn) {;}
   };
   
   extern sim_t *sim;
   
   
-  const int32 k_max_contact_points = 2048;  
+  const int32 k_max_contact_points = 2048;
   struct contact_point_t
   {
     b2Fixture* fixtureA;

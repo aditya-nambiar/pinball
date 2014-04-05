@@ -2,7 +2,7 @@
 * Copyright (c) 2006-2009 Erin Catto http://www.box2d.org
 *
 * This software is provided 'as-is', without any express or implied
-* warranty.  In no event will the authors be held liable for any damages
+* warranty. In no event will the authors be held liable for any damages
 * arising from the use of this software.
 * Permission is granted to anyone to use this software for any purpose,
 * including commercial applications, and to alter it and redistribute it
@@ -16,11 +16,11 @@
 * 3. This notice may not be removed or altered from any source distribution.
 */
 
-/* 
- * Base code for CS 296 Software Systems Lab 
- * Department of Computer Science and Engineering, IIT Bombay
- * Instructor: Parag Chaudhuri
- */
+/*
+* Base code for CS 296 Software Systems Lab
+* Department of Computer Science and Engineering, IIT Bombay
+* Instructor: Parag Chaudhuri
+*/
 
 #ifndef _DOMINOS_HPP_
 #define _DOMINOS_HPP_
@@ -34,58 +34,73 @@
 #include <stdint.h>
 #include <inttypes.h>
 #include <math.h>
+#include "cs296_base.hpp"
 //structure to store current surface velocity of a fixture
 b2PrismaticJoint* up;
-b2Body* ball;
+//b2Body* ball;
+
+b2Body* darkhole;
+b2Body* curve;
 
 namespace cs296
 {
+int32 score;
+bool killball;
+bool smallkaro;
+b2Body* ball;
+b2Body* reflector;
   //! This is the class that sets up the Box2D simulation world
   //! Notice the public inheritance - why do we inherit the base_sim_t class?
     ///int scoremax=0;
    
     class MyContactListener : public b2ContactListener
      {
-	 public:
-		 int i;
-		void MycontactListener(){i=0;}
+public:
+int i;
+void MycontactListener(){i=0;}
        void BeginContact(b2Contact* contact) {
   
          //check if fixture A was a ball
-		     void *yo= contact->GetFixtureA()->GetBody()->GetUserData();
-   			 void *lo= contact->GetFixtureB()->GetBody()->GetUserData();
-			 int a =*((int*)(&yo));
-			 int b=*((int*)(&lo));
-   		     if (*((int*)(&yo))==109){
-   		     	ball->SetLinearVelocity(b2Vec2(0,0));
-				up->SetMotorSpeed(2.5f);
-				std::cout<<"enter\n";
-				for( long i=0; i<pow(10,8); i++){}
-   		     }
-			 if(a==103 || a==104){
-				 score+=15;
-		 }
-		 if(a==108 || b==108){
-			 ball->SetLinearVelocity(b2Vec2(4,0));
-		 }
-			 
+void *yo= contact->GetFixtureA()->GetBody()->GetUserData();
+    void *lo= contact->GetFixtureB()->GetBody()->GetUserData();
+int a =*((int*)(&yo));
+int b=*((int*)(&lo));
+    if (*((int*)(&yo))==109){
+    ball->SetLinearVelocity(b2Vec2(0,0));
+up->SetMotorSpeed(2.5f);
+std::cout<<"enter\n";
+for( long i=0; i<pow(10,8); i++){}
+    }
+if(a==103 || a==104){
+score+=15;
+}
+if(a==201 || b==201){
+killball = true;
+}
+if(a==108 || b==108){
+ball->SetLinearVelocity(b2Vec2(4,0));
+}
+if(a==200 || b==200){
+smallkaro = true;
+}
+
        }
   
        void EndContact(b2Contact* contact) {
   
-	         void *yo= contact->GetFixtureA()->GetBody()->GetUserData();
- 			 void *lo= contact->GetFixtureB()->GetBody()->GetUserData();
-			 int a =*((int*)(&yo));
-			 int b=*((int*)(&lo));
- 		     if (a==109){
- 				 for( long i=0; i<pow(10,8); i++){}
- 		     	up->SetMotorSpeed(-2.5f);
-				std::cout<<"exit\n";
- 			
- 		     }
-			 if(a==108 || b==108){
-				 ball->SetLinearVelocity(b2Vec2(.2,.2));
-			 }
+void *yo= contact->GetFixtureA()->GetBody()->GetUserData();
+  void *lo= contact->GetFixtureB()->GetBody()->GetUserData();
+int a =*((int*)(&yo));
+int b=*((int*)(&lo));
+  if (a==109){
+  for( long i=0; i<pow(10,8); i++){}
+  up->SetMotorSpeed(-2.5f);
+std::cout<<"exit\n";
+ 
+  }
+if(a==108 || b==108){
+ball->SetLinearVelocity(b2Vec2(.2,.2));
+}
        }
      };
   class dominos_t : public base_sim_t
@@ -93,38 +108,37 @@ namespace cs296
   public:
     dominos_t();
     MyContactListener myContactListenerInstance;
-	b2Body* lflipstatv;
-	b2Body* lflipstatd;
-	b2Body* rflipstatv;
-	b2Body* rflipstatd;
-	b2Body* lflipper;
-	b2Body* rflipper;
-	b2Body* rightsep1;
-	b2Body* rightsep2;
-	b2Body* launcher;
-	
-	b2Body* stopper;
-	b2Body* temp2;
-	b2Body* temp1;
-	b2Body* temp;
-	b2Body* horz;
-	b2Body* hormov;
-	b2Body* vermov;
-	b2Body* triangle1;
-	b2Body* triangle2;
-	b2RevoluteJoint* lflip;
-	b2RevoluteJoint* rflip;
-	b2PrismaticJoint* right;
-	
+b2Body* lflipstatv;
+b2Body* lflipstatd;
+b2Body* rflipstatv;
+b2Body* rflipstatd;
+b2Body* lflipper;
+b2Body* rflipper;
+b2Body* rightsep1;
+b2Body* rightsep2;
+b2Body* launcher;
+
+b2Body* stopper;
+b2Body* temp2;
+b2Body* temp1;
+b2Body* temp;
+b2Body* horz;
+b2Body* hormov;
+b2Body* vermov;
+b2Body* triangle1;
+b2Body* triangle2;
+b2RevoluteJoint* lflip;
+b2RevoluteJoint* rflip;
+b2PrismaticJoint* right;
+
     void keyboard(unsigned char key);
     void keyboardUp(unsigned char key);
-	static base_sim_t* create()
-	{     
-		return new dominos_t;
-	}
-	
-	
+static base_sim_t* create()
+{
+return new dominos_t;
+}
+
+
   };
 }
-  
 #endif
