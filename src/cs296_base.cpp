@@ -20,7 +20,7 @@
 #include <cstdio>
 using namespace std;
 using namespace cs296;
-int cnt=-1;
+int cnt=-1,cnt2=-1,cnt3=-1;
 
 base_sim_t::base_sim_t()
 {
@@ -118,6 +118,8 @@ time_step = 0.0f;
   
   m_point_count = 0;
   
+    
+  
   if(killball) {
 	  m_world->DestroyBody(ball);
 	  std::cout << "killed" << endl;
@@ -143,17 +145,47 @@ ball->SetUserData((void*)myint);
 ball->CreateFixture(&fixtureDef);
 ball->SetLinearVelocity(b2Vec2(7,-7));
   }
-  if(smallkaro){
+  if(smallkaro1){
 	  b2CircleShape* circle = (b2CircleShape*)reflector->GetFixtureList()->GetShape();
 	  circle->m_radius=0.5f;
-	  smallkaro = false;
+	  smallkaro1 = false;
 	  cnt = 0;
   }
-  if(!smallkaro && cnt >=0){
+  if(!smallkaro1 && cnt >=0){
 	  cnt++;
 	  if(cnt==10){
 		  cnt = -1;
 		  b2CircleShape* circle = (b2CircleShape*)reflector->GetFixtureList()->GetShape();
+		  circle->m_radius=1.0f;
+  }
+}
+
+	if(smallkaro2){
+	  b2CircleShape* circle = (b2CircleShape*)reflector2->GetFixtureList()->GetShape();
+	  circle->m_radius=0.5f;
+	  smallkaro2 = false;
+	  cnt2 = 0;
+  }
+  if(!smallkaro2 && cnt2 >=0){
+	  cnt2++;
+	  if(cnt2==10){
+		  cnt2 = -1;
+		  b2CircleShape* circle = (b2CircleShape*)reflector2->GetFixtureList()->GetShape();
+		  circle->m_radius=1.0f;
+  }
+}
+
+	if(smallkaro3){
+	  b2CircleShape* circle = (b2CircleShape*)reflector3->GetFixtureList()->GetShape();
+	  circle->m_radius=0.5f;
+	  smallkaro3 = false;
+	  cnt3 = 0;
+  }
+  if(!smallkaro3 && cnt3 >=0){
+	  cnt3++;
+	  if(cnt3==10){
+		  cnt3 = -1;
+		  b2CircleShape* circle = (b2CircleShape*)reflector3->GetFixtureList()->GetShape();
 		  circle->m_radius=1.0f;
   }
 }

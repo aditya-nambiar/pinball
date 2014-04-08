@@ -37,9 +37,14 @@ namespace cs296
 //int32 wer=0;
 extern int32 score;
 extern bool killball;
-extern bool smallkaro;
+extern bool killball2;
+extern bool smallkaro1;
+extern bool smallkaro2;
+extern bool smallkaro3;
 extern b2Body* ball;
 extern b2Body* reflector;
+extern b2Body* reflector2;
+extern b2Body* reflector3;
   //! What is the difference between a class and a struct in C++?
   class base_sim_t;
   struct settings_t;

@@ -46,9 +46,14 @@ namespace cs296
 {
 int32 score;
 bool killball;
-bool smallkaro;
+bool killball2;
+bool smallkaro1;
+bool smallkaro2;
+bool smallkaro3;
 b2Body* ball;
 b2Body* reflector;
+b2Body* reflector2;
+b2Body* reflector3;
 b2Body* ballreleaser;
   //! This is the class that sets up the Box2D simulation world
   //! Notice the public inheritance - why do we inherit the base_sim_t class?
@@ -75,15 +80,26 @@ void BeginContact(b2Contact* contact) {//check if fixture A was a ball
 	if(a==103 || a==104){
 	score+=15;
 	}
-	if(a==201 || b==201){
+	if(a==401 || b==401){
 	std::cout << "done\n";
 	killball = true;	
 	}
+	if(a==402 || b==402){
+	std::cout << "done\n";
+	killball2 = true;	
+	}
+
 	if(a==108 || b==108){
 	ball->SetLinearVelocity(b2Vec2(4,0));
 	}
-	if(a==200 || b==200){
-	smallkaro = true;
+	if(a==301 || b==301){
+	smallkaro1 = true;
+	}
+	if(a==302 || b==302){
+	smallkaro2 = true;
+	}
+	if(a==303 || b==303){
+	smallkaro3 = true;
 	}
 }
   

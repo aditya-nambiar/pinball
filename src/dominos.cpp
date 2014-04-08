@@ -93,8 +93,8 @@ ground->CreateFixture(&fd);
 }*/
 //reflector
 {
-b2BodyDef bod;
-bod.position = b2Vec2(0.0f,30.0f);
+b2BodyDef bod,bod2,bod3;
+bod.position = b2Vec2(0.0f,29.0f);
 
 b2CircleShape circle;
 	circle.m_p.Set(0,0);
@@ -102,12 +102,23 @@ b2CircleShape circle;
 b2FixtureDef fixtureDef;
 fixtureDef.shape = &circle;
 fixtureDef.density = 0.1;
-fixtureDef.restitution = 5;
+fixtureDef.restitution = 3;
 
 reflector = m_world->CreateBody(&bod);
-int myint=200;
+int myint=301,myint2=302,myint3=303;
 reflector->SetUserData((void*)myint);
 reflector->CreateFixture(&fixtureDef);
+
+bod2.position = b2Vec2(3.0f, 26.0f);
+reflector2 = m_world->CreateBody(&bod2);
+reflector2->SetUserData((void*)myint2);
+reflector2->CreateFixture(&fixtureDef);
+
+bod3.position = b2Vec2(3.0f, 32.0f);
+reflector3 = m_world->CreateBody(&bod3);
+reflector3->SetUserData((void*)myint3);
+reflector3->CreateFixture(&fixtureDef);
+
 }
 //darkhole
 {
@@ -117,7 +128,7 @@ b2EdgeShape boundary;
 
 boundary.Set(b2Vec2(10.5,23.5),b2Vec2(13,21));
 darkhole->CreateFixture(&boundary,0.0f);
-int myint = 201;
+int myint = 401;
 darkhole->SetUserData((void*)myint);
 }
 /*{
@@ -146,6 +157,8 @@ b2EdgeShape boundary;
 
 boundary.Set(b2Vec2(-15,40),b2Vec2(-13,42));
 ballreleaser->CreateFixture(&boundary,0.0f);
+int myint = 402;
+darkhole->SetUserData((void*)myint
 }
 //curve
 {
@@ -185,7 +198,13 @@ boundary.Set(b2Vec2(-13,42),b2Vec2(-11,40));
 curve->CreateFixture(&boundary,0.0f);
 boundary.Set(b2Vec2(13,26),b2Vec2(7,20));
 curve->CreateFixture(&boundary,0.0f);
-boundary.Set(b2Vec2(13,21),b2Vec2(10,18	));
+boundary.Set(b2Vec2(13,21),b2Vec2(10,18));
+curve->CreateFixture(&boundary,0.0f);
+boundary.Set(b2Vec2(-15,28),b2Vec2(-7,24));
+curve->CreateFixture(&boundary,0.0f);
+boundary.Set(b2Vec2(-10,21),b2Vec2(-10,17));
+curve->CreateFixture(&boundary,0.0f);
+boundary.Set(b2Vec2(-10,21),b2Vec2(-7,19.5));
 curve->CreateFixture(&boundary,0.0f);
 }
 
@@ -215,7 +234,6 @@ shape.SetAsBox(0.01, 2, b2Vec2(0,0), 0.8);
 body->CreateFixture(&shape, density);
 int myint=101;
 body->SetUserData((void*)myint);
-
 }
 
 b2Body* b4;
@@ -232,6 +250,96 @@ b4->CreateFixture(&shape, 3.0f);
 b2RevoluteJointDef jd;
 b2Vec2 anchor;
 anchor.Set(-10.0f, 30.0f);
+jd.Initialize(body, b4, anchor);
+m_world->CreateJoint(&jd);
+}
+
+//Chota Spinner 1
+{
+b2Body* body;
+{
+b2BodyDef bDef;
+bDef.type = b2_dynamicBody;
+bDef.position = b2Vec2(-13, 24);
+body = m_world->CreateBody(&bDef);
+
+b2PolygonShape shape;
+const float32 density = 4;
+
+shape.SetAsBox(1, 0.01);
+body->CreateFixture(&shape, density);
+
+shape.SetAsBox(0.01, 1, b2Vec2(0,0), 0);
+body->CreateFixture(&shape, density);
+
+shape.SetAsBox(1, 0.01, b2Vec2(0,0), 0.8);
+body->CreateFixture(&shape, density);
+
+shape.SetAsBox(0.01, 1, b2Vec2(0,0), 0.8);
+body->CreateFixture(&shape, density);
+int myint=101;
+body->SetUserData((void*)myint);
+}
+
+b2Body* b4;
+{
+b2PolygonShape shape;
+shape.SetAsBox(0.025f, 0.025f);
+
+b2BodyDef bd;
+bd.position.Set(-13, 24);
+b4 = m_world->CreateBody(&bd);
+b4->CreateFixture(&shape, 3.0f);
+}
+
+b2RevoluteJointDef jd;
+b2Vec2 anchor;
+anchor.Set(-13.0f, 24.0f);
+jd.Initialize(body, b4, anchor);
+m_world->CreateJoint(&jd);
+}
+
+//Chota Spinner 2
+{
+b2Body* body;
+{
+b2BodyDef bDef;
+bDef.type = b2_dynamicBody;
+bDef.position = b2Vec2(-12, 19);
+body = m_world->CreateBody(&bDef);
+
+b2PolygonShape shape;
+const float32 density = 4;
+
+shape.SetAsBox(1, 0.01);
+body->CreateFixture(&shape, density);
+
+shape.SetAsBox(0.01, 1, b2Vec2(0,0), 0);
+body->CreateFixture(&shape, density);
+
+shape.SetAsBox(1, 0.01, b2Vec2(0,0), 0.8);
+body->CreateFixture(&shape, density);
+
+shape.SetAsBox(0.01, 1, b2Vec2(0,0), 0.8);
+body->CreateFixture(&shape, density);
+int myint=101;
+body->SetUserData((void*)myint);
+}
+
+b2Body* b4;
+{
+b2PolygonShape shape;
+shape.SetAsBox(0.025f, 0.025f);
+
+b2BodyDef bd;
+bd.position.Set(-12, 19);
+b4 = m_world->CreateBody(&bd);
+b4->CreateFixture(&shape, 3.0f);
+}
+
+b2RevoluteJointDef jd;
+b2Vec2 anchor;
+anchor.Set(-12.0f, 19.0f);
 jd.Initialize(body, b4, anchor);
 m_world->CreateJoint(&jd);
 }
@@ -272,7 +380,7 @@ shp.Set(vertices, 3);
 b2FixtureDef fd;
 fd.shape = &shp;
 fd.density = 5.0f;
-fd.restitution=1.8;
+fd.restitution=1.2;
 b2BodyDef bd;
 
 bd.position.Set(-6.0f, 9.0f);
@@ -295,7 +403,7 @@ shp.Set(vertices, 3);
 b2FixtureDef fd;
 fd.shape = &shp;
 fd.density = 5.0f;
-fd.restitution=1.8;
+fd.restitution=1.2;
 b2BodyDef bd;
 bd.position.Set(6.0f, 9.0f);
 triangle2 = m_world->CreateBody(&bd);
@@ -492,18 +600,16 @@ temp->CreateFixture(&boxFixtureDef);
 //left guard so that ball doesnt drop
 {
 b2PolygonShape boxShape;
-boxShape.SetAsBox(2.6,0.2);
+boxShape.SetAsBox(2.0,0.2);
 b2FixtureDef boxFixtureDef;
 boxFixtureDef.shape = &boxShape;	
 b2BodyDef bd;
-bd.angle = -60* DEGTORAD;
-bd.position.Set(-13.5f, 18.0f);
+bd.angle = -40* DEGTORAD;
+bd.position.Set(-13.5f, 16.0f);
 temp1 = m_world->CreateBody(&bd);
 int myint=116;
 temp1->SetUserData((void*)myint);
 temp1->CreateFixture(&boxFixtureDef);
-
-
 
 }
 // left flipper
