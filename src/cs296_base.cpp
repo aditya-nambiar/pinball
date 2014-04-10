@@ -24,6 +24,8 @@ int cnt1=-1;
 int cnt2=-1;
 int cnt3=-1;
 
+
+
 base_sim_t::base_sim_t()
 {
 b2Vec2 gravity;
@@ -126,25 +128,125 @@ time_step = 0.0f;
 	  killball = false;
 	  for(long i=0; i<10000000000; i++){}
 	  b2BodyDef bd;
-bd.type = b2_dynamicBody;
-bd.position.Set(-12, 39);
+	bd.type = b2_dynamicBody;
+	bd.position.Set(-12, 39);
 
-b2CircleShape circle;
-circle.m_radius = 0.54f;
+	b2CircleShape circle;
+	circle.m_radius = 0.54f;
 
-b2FixtureDef fixtureDef;
-fixtureDef.shape = &circle;
-fixtureDef.density = 1.0f;
-fixtureDef.friction = 0.f;
-fixtureDef.restitution = 0.2f;
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &circle;
+	fixtureDef.density = 1.0f;
+	fixtureDef.friction = 0.f;
+	fixtureDef.restitution = 0.2f;
 
-ball= m_world->CreateBody(&bd);
-ball->SetUserData(this);
-int myint=118;
-ball->SetUserData((void*)myint);
-ball->CreateFixture(&fixtureDef);
-ball->SetLinearVelocity(b2Vec2(7,-7));
+	ball= m_world->CreateBody(&bd);
+	ball->SetUserData(this);
+	int myint=118;
+	ball->SetUserData((void*)myint);
+	ball->CreateFixture(&fixtureDef);
+	ball->SetLinearVelocity(b2Vec2(15,-15));
   }
+  if(toddo){
+	m_world->DestroyBody(breakingobj);
+	toddo=false;
+	  
+	b2BodyDef bod;
+	bod.type=b2_dynamicBody;
+	b2EdgeShape boundary;
+	b2FixtureDef fix;
+	fix.filter.categoryBits = 0x0002;//
+	fix.filter.maskBits = 0x0004;//
+	fix.shape = &boundary;
+	fix.density = 1.0;
+	boundary.Set(b2Vec2(-4,20),b2Vec2(-3,20));
+	falobj1=m_world->CreateBody(&bod);
+	falobj1->CreateFixture(&fix);
+	falobj1->SetLinearVelocity(b2Vec2(-0.5,0));
+	falobj1->ApplyAngularImpulse(100,true);
+	
+	b2BodyDef bod2;
+	bod2.type=b2_dynamicBody;
+	b2EdgeShape boundary2;
+	b2FixtureDef fix2;
+	fix.density = 1.0;
+
+	fix2.filter.categoryBits = 0x0002;//
+	fix2.filter.maskBits = 0x0004;//
+	fix2.shape = &boundary2;
+	boundary2.Set(b2Vec2(-3,20),b2Vec2(-2,20));
+	falobj2=m_world->CreateBody(&bod2);
+	falobj2->CreateFixture(&fix2);
+	falobj2->SetLinearVelocity(b2Vec2(1,0));
+
+}
+
+	if(toddo2){
+	m_world->DestroyBody(breakingobj2);
+	toddo2=false;
+	  
+	b2BodyDef bod;
+	bod.type=b2_dynamicBody;
+	b2EdgeShape boundary;
+	b2FixtureDef fix;
+	fix.filter.categoryBits = 0x0002;//
+	fix.filter.maskBits = 0x0004;//
+	fix.shape = &boundary;
+	boundary.Set(b2Vec2(4,38),b2Vec2(5,38));
+	falobj1=m_world->CreateBody(&bod);
+	falobj1->CreateFixture(&fix);
+	falobj1->SetLinearVelocity(b2Vec2(-0.5,0));
+		falobj1->ApplyAngularImpulse(100,true);
+
+	
+	b2BodyDef bod2;
+	bod2.type=b2_dynamicBody;
+	b2EdgeShape boundary2;
+	b2FixtureDef fix2;
+		fix.density = 1.0;
+
+	fix2.filter.categoryBits = 0x0002;//
+	fix2.filter.maskBits = 0x0004;//
+	fix2.shape = &boundary2;
+	boundary2.Set(b2Vec2(5,38),b2Vec2(6,38));
+	falobj2=m_world->CreateBody(&bod2);
+	falobj2->CreateFixture(&fix2);
+	falobj2->SetLinearVelocity(b2Vec2(1,0));
+
+}
+
+	if(toddo3){
+	m_world->DestroyBody(breakingobj3);
+	toddo3=false;
+	  
+	b2BodyDef bod;
+	bod.type=b2_dynamicBody;
+	b2EdgeShape boundary;
+	b2FixtureDef fix;
+		fix.density = 1.0;
+	fix.filter.categoryBits = 0x0002;//
+	fix.filter.maskBits = 0x0004;//
+	fix.shape = &boundary;
+	boundary.Set(b2Vec2(4,18),b2Vec2(5,18));
+	falobj1=m_world->CreateBody(&bod);
+	falobj1->CreateFixture(&fix);
+	falobj1->SetLinearVelocity(b2Vec2(-0.5,0));
+		falobj1->ApplyAngularImpulse(100,true);
+
+	
+	b2BodyDef bod2;
+	bod2.type=b2_dynamicBody;
+	b2EdgeShape boundary2;
+	b2FixtureDef fix2;
+	fix2.filter.categoryBits = 0x0002;//
+	fix2.filter.maskBits = 0x0004;//
+	fix2.shape = &boundary2;
+	boundary2.Set(b2Vec2(5,18),b2Vec2(6,18));
+	falobj2=m_world->CreateBody(&bod2);
+	falobj2->CreateFixture(&fix2);
+	falobj2->SetLinearVelocity(b2Vec2(1,0));
+}
+	  
   
   if(smallkaro1){
 	  b2CircleShape* circle = (b2CircleShape*)reflector->GetFixtureList()->GetShape();

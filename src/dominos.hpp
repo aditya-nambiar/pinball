@@ -49,11 +49,20 @@ bool killball;
 bool smallkaro1;
 bool smallkaro2;
 bool smallkaro3;
+bool toddo;
+bool toddo2;
+bool toddo3;
 b2Body* ball;
 b2Body* reflector;
 b2Body* reflector2;
 b2Body* reflector3;
 b2Body* ballreleaser;
+b2Body* breakingobj;
+b2Body* breakingobj2;
+b2Body* breakingobj3;
+b2Body* falobj1;
+b2Body* falobj2;
+b2Body* conveyer[100];
   //! This is the class that sets up the Box2D simulation world
   //! Notice the public inheritance - why do we inherit the base_sim_t class?
     ///int scoremax=0;
@@ -70,6 +79,9 @@ void BeginContact(b2Contact* contact) {//check if fixture A was a ball
 	void *lo= contact->GetFixtureB()->GetBody()->GetUserData();
 	int a=*((int*)(&yo));
 	int b=*((int*)(&lo));
+	if( (a==99 && b==118 )||((a==118 && b==99 ))){
+		ball->SetLinearVelocity(b2Vec2(4,0));
+	}
 	if ((a==109 && b==118 )||((a==118 && b==109 ))){
 		ball->SetLinearVelocity(b2Vec2(0,0));
 		up->SetMotorSpeed(2.5f);
@@ -84,9 +96,9 @@ void BeginContact(b2Contact* contact) {//check if fixture A was a ball
 	killball = true;	
 	}
 	
-	// if(a==108 || b==108){
-// 	ball->SetLinearVelocity(b2Vec2(4,0));
-// 	}
+	if(a==108 || b==108){
+	ball->SetLinearVelocity(b2Vec2(4,0));
+	}
 	if(a==301 || b==301){
 	smallkaro1 = true;
 	}
@@ -96,6 +108,15 @@ void BeginContact(b2Contact* contact) {//check if fixture A was a ball
 	if(a==303 || b==303){
 	smallkaro3 = true;
 	}
+	if(a==500 || b==500){
+	toddo = true;
+	}
+	if(a==501 || b==501){
+	toddo2 = true;
+	}
+	if(a==502 || b==502){
+	toddo3 = true;
+	}
 }
   
 void EndContact(b2Contact* contact) {
@@ -104,13 +125,16 @@ void EndContact(b2Contact* contact) {
 	void *lo= contact->GetFixtureB()->GetBody()->GetUserData();
 	int a =*((int*)(&yo));
 	int b=*((int*)(&lo));
-	if ((a==109 && b==118 )||((a==118 && b==109 ))){
+	if (a==109){
 		for( long i=0; i<pow(10,8); i++){}
 		up->SetMotorSpeed(-2.5f);
 		std::cout<<"exit\n";
 		}
 	if(a==108 || b==108){
 	ball->SetLinearVelocity(b2Vec2(.2,.2));
+	}
+	if( (a==99 && b==118 )||((a==118 && b==99 ))){
+		ball->SetLinearVelocity(b2Vec2(6,0));
 	}
  }
 };

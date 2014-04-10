@@ -40,10 +40,18 @@ extern bool killball;
 extern bool smallkaro1;
 extern bool smallkaro2;
 extern bool smallkaro3;
+extern bool toddo;
+extern bool toddo2;
+extern bool toddo3;
 extern b2Body* ball;
 extern b2Body* reflector;
 extern b2Body* reflector2;
 extern b2Body* reflector3;
+extern b2Body* breakingobj;
+extern b2Body* breakingobj2;
+extern b2Body* breakingobj3;
+extern b2Body* falobj1;
+extern b2Body* falobj2;
   //! What is the difference between a class and a struct in C++?
   class base_sim_t;
   struct settings_t;
