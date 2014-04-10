@@ -52,16 +52,16 @@ bool smallkaro3;
 bool toddo;
 bool toddo2;
 bool toddo3;
-b2Body* ball;
-b2Body* reflector;
-b2Body* reflector2;
-b2Body* reflector3;
-b2Body* ballreleaser;
-b2Body* breakingobj;
-b2Body* breakingobj2;
-b2Body* breakingobj3;
-b2Body* falobj1;
-b2Body* falobj2;
+b2Body* ball;///The ball in side the pinball simulation
+b2Body* reflector;///Bumper ball 1, which shrinks and pushes out the ball
+b2Body* reflector2;///Bumper ball 2, which shrinks and pushes out the ball
+b2Body* reflector3;///Bumper ball 3, which shrinks and pushes out the ball
+b2Body* ballreleaser;///The place from where the ball is released after entering the black hole
+b2Body* breakingobj;///Breaking edge which breaks on collision with the ball
+b2Body* breakingobj2;///Breaking edge which breaks on collision with the ball
+b2Body* breakingobj3;///Breaking edge which breaks on collision with the ball
+b2Body* falobj1;///The edges created when the edge breaks
+b2Body* falobj2;///The edges created when the edge breaks
 b2Body* conveyer[100];
   //! This is the class that sets up the Box2D simulation world
   //! Notice the public inheritance - why do we inherit the base_sim_t class?
@@ -146,27 +146,26 @@ void EndContact(b2Contact* contact) {
   public:
     dominos_t();
     MyContactListener myContactListenerInstance;
-b2Body* lflipstatv;
-b2Body* lflipstatd;
-b2Body* rflipstatv;
-b2Body* rflipstatd;
-b2Body* lflipper;
-b2Body* rflipper;
-b2Body* rightsep1;
-b2Body* rightsep2;
-b2Body* launcher;
+b2Body* lflipstatv;///Vertical supporter for left flipper
+b2Body* lflipstatd;///Diagnol supporter for left flipper
+b2Body* rflipstatv;///Vertical supporter for right flipper
+b2Body* rflipstatd;///Diagnol supporter for right flipper
+b2Body* lflipper;///Left flipper
+b2Body* rflipper;///Right flipper
+b2Body* rightsep1;///Top right seperator , makes way for new ball
+b2Body* rightsep2;///Bottom right seperator , seperates launcher from main body
+b2Body* launcher;///The launcher launches tha ball
 
-b2Body* stopper;
-b2Body* temp2;
+b2Body* stopper;///Stopper prevent the launcher form flying off
+b2Body* temp2;//
 b2Body* temp1;
 b2Body* temp;
-b2Body* horz;
-b2Body* hormov;
-b2Body* vermov;
-b2Body* triangle1;
-b2Body* triangle2;
-b2RevoluteJoint* lflip;
-b2RevoluteJoint* rflip;
+
+b2Body* vermov;///Vertical ball lifter
+b2Body* triangle1;///Left traingular bumper
+b2Body* triangle2;///Right triangular bumper
+b2RevoluteJoint* lflip;///Left flipper revolute joint
+b2RevoluteJoint* rflip;///Right flipper revolute joint
 b2PrismaticJoint* right;
 
     void keyboard(unsigned char key);

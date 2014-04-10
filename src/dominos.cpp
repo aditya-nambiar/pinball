@@ -48,46 +48,10 @@ namespace cs296
     {	
 //MyContactListener myContactListenerInstance;
   
-//in FooTest constructor
+
 m_world->SetContactListener(&myContactListenerInstance);
-/*
-void createBox(world, x, y, width, height, options) 
-{
 
-     //default setting
-    options = $.extend(true, {
-        'density' : 2.5 ,
-        'friction' : 2.0 ,
-        'restitution' : 2.5 ,
-
-        'type' : b2Body.b2_dynamicBody
-    }, options);
-
-    var body_def = new b2BodyDef();
-    var fix_def = new b2FixtureDef();
-
-    fix_def.density = options.density;
-    fix_def.friction = options.friction;
-    fix_def.restitution = options.restitution;
-
-    fix_def.shape = new b2PolygonShape();
-
-    fix_def.shape.SetAsBox( width/2 , height/2 );
-
-    body_def.position.Set(x , y);
-
-    body_def.type = options.type;
-
-    body_def.userData =options.user_data;
-
-    var b = world.CreateBody( body_def );
-    var f = b.CreateFixture(fix_def);
-
-    return b;
-}
-createBox(m_world, 8.50, 3.80, 1 , 1, {type : b2Body.b2_dynamicBody, 'user_data' : {'fill_color' : 'rgba(204,237,165,1)' , 'border_color' : '#7FE57F' }});
-*/
-//reflector
+///Bumper balls the shrink and push the ball away
 {
 b2BodyDef bod,bod2,bod3;
 bod.position = b2Vec2(0.0f,29.0f);
@@ -100,17 +64,20 @@ fixtureDef.shape = &circle;
 fixtureDef.density = 0.1;
 fixtureDef.restitution = 5;
 
+///Creating bumper ball 1
 reflector = m_world->CreateBody(&bod);
 int myint=301;
 reflector->SetUserData((void*)myint);
 reflector->CreateFixture(&fixtureDef);
 
+///Creating bumper ball 2
 bod2.position = b2Vec2(3.0f, 26.0f);
 reflector2 = m_world->CreateBody(&bod2);
 int myint2=302;
 reflector2->SetUserData((void*)myint2);
 reflector2->CreateFixture(&fixtureDef);
 
+///Creating bumper ball 3
 bod3.position = b2Vec2(3.0f, 32.0f);
 reflector3 = m_world->CreateBody(&bod3);
 int myint3=303;
@@ -118,7 +85,8 @@ reflector3->SetUserData((void*)myint3);
 reflector3->CreateFixture(&fixtureDef);
 
 }
-//breaking object
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///Breaking object 1, an edge piece that is broken when it collides with the ball
 {
 b2BodyDef bod;
 
@@ -130,7 +98,7 @@ int myint = 500;
 breakingobj->SetUserData((void*)myint);
 }
 
-//breaking object 2
+///Breaking object 2, an edge piece that is broken when it collides with the ball
 {
 b2BodyDef bod;
 
@@ -142,7 +110,7 @@ int myint = 501;
 breakingobj2->SetUserData((void*)myint);
 }
 
-//breaking object 3
+///breaking object 3,an edge piece that is broken when it collides with the ball
 {
 b2BodyDef bod;
 
@@ -153,8 +121,10 @@ breakingobj3->CreateFixture(&boundary,0.0f);
 int myint = 502;
 breakingobj3->SetUserData((void*)myint);
 }
-	
-//darkhole
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+///Darkhole, a transporter that transports the ball to top right corner when the ball collides with it
 {
 b2BodyDef bd;
 darkhole=m_world->CreateBody(&bd);
@@ -166,7 +136,9 @@ int myint = 201;
 darkhole->SetUserData((void*)myint);
 }
 
-//Ball releaser
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+///Ball releaser, the place from which the ball is released when the ball enters the Darkhole
 {
 b2BodyDef bd;
 ballreleaser=m_world->CreateBody(&bd);
@@ -175,6 +147,8 @@ b2EdgeShape boundary;
 boundary.Set(b2Vec2(-15,40),b2Vec2(-13,42));
 ballreleaser->CreateFixture(&boundary,0.0f);
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///Outer boundary of the entire pinball simulation
 {
 b2BodyDef bd;
 curve=m_world->CreateBody(&bd);
@@ -227,9 +201,9 @@ curve->CreateFixture(&boundary,0.0f);
 boundary.Set(b2Vec2(-15,-4.8),b2Vec2(-15,0));
 curve->CreateFixture(&boundary,0.0f);
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-//Spinner
+///Spinner, an obstacle with spins rapidy on colliding with file
 {
 b2Body* body;
 {
@@ -256,6 +230,7 @@ int myint=101;
 body->SetUserData((void*)myint);
 
 }
+///The hinge on with the spinner rotates about
 b2Body* b4;
 {
 b2PolygonShape shape;
@@ -275,7 +250,7 @@ m_world->CreateJoint(&jd);
 }
 
 
-//Char Spinner
+/// Spinner 2, an obstacle with spins rapidy on colliding with file
 {
 b2Body* body;
 {
@@ -297,6 +272,7 @@ int myint=101;
 body->SetUserData((void*)myint);
 
 }
+///The hinge on with the spinner rotates about
 
 b2Body* b4;
 {
@@ -316,7 +292,7 @@ jd.Initialize(body, b4, anchor);
 m_world->CreateJoint(&jd);
 }
 
-//Chota Spinner 1
+///Small Spinner 1, the smaller spinners inside the left tube
 {
 b2Body* body;
 {
@@ -342,7 +318,7 @@ body->CreateFixture(&shape, density);
 int myint=101;
 body->SetUserData((void*)myint);
 }
-
+///The hinge on with the spinner rotates about
 b2Body* b4;
 {
 b2PolygonShape shape;
@@ -361,7 +337,7 @@ jd.Initialize(body, b4, anchor);
 m_world->CreateJoint(&jd);
 }
 
-//Chota Spinner 2
+///Small Spinner 2, the smaller spinners inside the left tube
 {
 b2Body* body;
 {
@@ -387,7 +363,7 @@ body->CreateFixture(&shape, density);
 int myint=101;
 body->SetUserData((void*)myint);
 }
-
+///The hinge on with the spinner rotates about
 b2Body* b4;
 {
 b2PolygonShape shape;
@@ -405,7 +381,9 @@ anchor.Set(-12.0f, 19.0f);
 jd.Initialize(body, b4, anchor);
 m_world->CreateJoint(&jd);
 }
-//vertical part of left thing not in touch with flipper
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///Vertical support for the left flipper 
 {
 b2PolygonShape shp;
 b2Vec2 vertices[4];
@@ -428,7 +406,8 @@ int myint=102;
 lflipstatv->SetUserData((void*)myint);
 lflipstatv->CreateFixture(&fd);
 }
-//left triangle
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///Left trianglular bumper
 {
 b2PolygonShape shp;
 b2Vec2 vertices[3];
@@ -451,7 +430,7 @@ int myint=103;
 triangle1->SetUserData((void*)myint);
 triangle1->CreateFixture(&fd);
 }
-//right triangle
+///Right triangle bumper
 {
 b2PolygonShape shp;
 b2Vec2 vertices[3];
@@ -473,7 +452,9 @@ int myint=104;
 triangle2->SetUserData((void*)myint);
 triangle2->CreateFixture(&fd);
 }
-//top right seperator , makes way for new ball
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///Top right seperator , makes way for new ball
 {
 
 b2PolygonShape boxShape;
@@ -489,7 +470,7 @@ rightsep1->SetUserData((void*)myint);
 rightsep1->CreateFixture(&boxFixtureDef);
 
 }
-//bottom right seperator , seperates launcher from main body
+///Bottom right seperator , seperates launcher from main body
 {
 
 b2PolygonShape boxShape;
@@ -505,11 +486,11 @@ rightsep2->SetUserData((void*)myint);
 rightsep2->CreateFixture(&boxFixtureDef);
 
 }
-//point that moves on the horizontal plank
 
-//horizontal plank on the bottom
 
-//tilted plank to lift ball back to new position--------id 111
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///Vertical ball lifter
 {
 
 b2PolygonShape boxShape;
@@ -519,8 +500,7 @@ boxFixtureDef.shape = &boxShape;
 boxFixtureDef.restitution=0;
 b2BodyDef bd;
 
-//void * tp= &myint;
-                //vermov->SetUserData(this);
+
 bd.type = b2_dynamicBody;
 bd.angle = 80* DEGTORAD;
 bd.position.Set(12.40f, 1.1f);
@@ -531,7 +511,9 @@ vermov->SetUserData((void*)myint);
 vermov->CreateFixture(&boxFixtureDef);
 
 }
-//stopper to stop launcher from flying of
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///Stopper to stop launcher from flying off
 {
 
 b2PolygonShape boxShape;
@@ -547,7 +529,8 @@ stopper->SetUserData((void*)myint);
 stopper->CreateFixture(&boxFixtureDef);
 
 }
-//launcher to launch ball
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///Launcher to launch ball
 {
 
 b2PolygonShape boxShape;
@@ -565,7 +548,7 @@ launcher->SetUserData((void*)myint);
 launcher->CreateFixture(&boxFixtureDef);
 
 }
-//diagnol part of left thing in touch with flipper
+///Diagnol support for the left flipper
 {
 b2PolygonShape boxShape;
 boxShape.SetAsBox(3.5,0.4);
@@ -579,30 +562,9 @@ int myint=112;
 lflipstatd->SetUserData((void*)myint);
 lflipstatd->CreateFixture(&boxFixtureDef);
 }
-//vertical part of right thing not in touch with flipper
-/*{
-b2PolygonShape shp;
-b2Vec2 vertices[4];
-vertices[0].Set(0.1f, 6.5f);
-vertices[1].Set(-0.5f,6.5f);
-vertices[2].Set(-0.5f, 0.5f);
-vertices[3].Set(0.1f, 0.0f);
 
 
-shp.Set(vertices, 4);
-
-b2FixtureDef fd;
-fd.shape = &shp;
-fd.density = 5.0f;
-
-b2BodyDef bd;
-bd.position.Set(12.0f, 8.9f);
-rflipstatv = m_world->CreateBody(&bd);
-int myint=113;
-rflipstatv->SetUserData((void*)myint);
-rflipstatv->CreateFixture(&fd);
-}*/
-//diagnol part of right thing in touch with flipper
+///Diagnol support for right flipper
 {
 b2PolygonShape boxShape;
 boxShape.SetAsBox(4.0,0.4);
@@ -616,21 +578,9 @@ int myint=114;
 rflipstatd->SetUserData((void*)myint);
 rflipstatd->CreateFixture(&boxFixtureDef);
 }
-/*//right top so that ball comes to main area
-{
-b2PolygonShape boxShape;
-boxShape.SetAsBox(4.5,0.2);
-b2FixtureDef boxFixtureDef;
-boxFixtureDef.shape = &boxShape;	
-b2BodyDef bd;
-bd.angle = -60* DEGTORAD;
-bd.position.Set(13.0f, 36.0f);
-temp = m_world->CreateBody(&bd);
-int myint=115;
-temp->SetUserData((void*)myint);
-temp->CreateFixture(&boxFixtureDef);
-}*/
-//left guard so that ball doesnt drop
+
+
+///Left guard so that ball doesnt drop
 {
 b2PolygonShape boxShape;
 boxShape.SetAsBox(2.2,0.2);
@@ -647,7 +597,8 @@ temp1->CreateFixture(&boxFixtureDef);
 
 
 }
-// left flipper
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///Left flipper
 {
 b2PolygonShape boxShape;
 boxShape.SetAsBox(2.8,0.4);
@@ -664,7 +615,7 @@ int myint=120;
 lflipper->SetUserData((void*)myint);
 lflipper->CreateFixture(&boxFixtureDef);
 }
-//right flipper
+///Right flipper
 {
 b2PolygonShape boxShape;
 boxShape.SetAsBox(2.8,0.4);
@@ -680,7 +631,8 @@ int myint=117;
 rflipper->SetUserData((void*)myint);
 rflipper->CreateFixture(&boxFixtureDef);
 }
-//ball
+///////////////////////////////////////////////////////////////////
+///Ball
 {
 
 b2BodyDef bd;
@@ -702,10 +654,12 @@ int myint=118;
 ball->SetUserData((void*)myint);
 ball->CreateFixture(&fixtureDef);
 }
-
-//////////////////----------------------------------------Chain--------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////
+///Chain, the conveyor belt system that restores ball to new game position
 b2BodyDef boda;
 boda.position = b2Vec2(-12.3f,-1.0f);
+
+///Gear 1 , the leftmost gear used in the conveyor belt
 b2Body* gear1;
 b2CircleShape circle;
 	circle.m_p.Set(0,0);
@@ -745,6 +699,8 @@ m_world->CreateJoint(&jd);
 b2BodyDef bodb;
 bodb.type=b2_dynamicBody;
 bodb.position = b2Vec2(8.6f,-1.0f);
+
+///Gear 2 , the middle gear used in the conveyor belt
 b2Body* gear2;
 
 	circle.m_p.Set(0,0);
@@ -776,6 +732,8 @@ bodc.position = b2Vec2(-3.8f,-1.0f);
 bodc.type=b2_dynamicBody;
 
  gear2->ApplyAngularImpulse(-3000.0f,true);
+
+///Gear 3 , the rightmost gear used in the conveyor belt
 b2Body* gear3;
 circle.m_radius = 2.0f;
 gear3 = m_world->CreateBody(&bodc);
@@ -801,10 +759,9 @@ m_world->CreateJoint(&jd);
 }
 	b2Vec2 vs[100];
 
-
+	///Create the main chain
 b2FixtureDef chainfd;
-    // chainfd.filter.categoryBits = 0x0004;
- //    chainfd.filter.maskBits = 0x0002;
+
 b2PolygonShape chainshape;
 float wid=0.5,heig=0.2;
 chainshape.SetAsBox(wid, heig);
@@ -814,7 +771,7 @@ chainfd.friction=1000.0f;
 chainfd.restitution=0;
 b2BodyDef chainDef;
 chainDef.type = b2_dynamicBody;
-//Top horizontal
+///Top horizontal part of the chain
 for (int i = 0; i < 23; ++i)
 {
 vs[i].Set(-12.5f+(2*wid)*i,1.0f);
@@ -823,7 +780,7 @@ conveyer[i]=m_world->CreateBody(&chainDef);
 conveyer[i]->CreateFixture(&chainfd);
 }
 
-///rightmost vertical
+///Rightmost vertical part of the chain 
 chainshape.SetAsBox(heig, wid);
  for (int i = 0; i < 4; ++i)
 {
@@ -833,7 +790,7 @@ conveyer[i+23]=m_world->CreateBody(&chainDef);
 conveyer[i+23]->CreateFixture(&chainfd);
 }
 
-///lower horizontal longest
+///Lower horizontal part of the chain
 chainshape.SetAsBox(wid, heig);
  for (int i = 0; i < 23; ++i)
 {
@@ -844,7 +801,7 @@ conveyer[i+27]->CreateFixture(&chainfd);
 }
 
 
-///upper leftmost vertical
+///Leftmost vertical part of the chain
 chainshape.SetAsBox(heig, wid);
  for (int i = 0; i < 4; ++i)
 {
@@ -853,6 +810,7 @@ chainDef.position.Set(-12.5f,-2.5f+(2*wid)*i);
 conveyer[i+50] = m_world->CreateBody(&chainDef);
 conveyer[i+50]->CreateFixture(&chainfd);
 }
+///Setting ids to all chain links
 for(int j=0; j<54; j++){
 	int myint=99;
     conveyer[j]->SetUserData((void*)myint);
@@ -865,14 +823,13 @@ b2RevoluteJointDef jointDef3;
 jointDef3.Initialize(conveyer[i-1], conveyer[i],vs[i]);
 m_world->CreateJoint(&jointDef3);
 }
-//jointDef3.Initialize(conveyer[51], conveyer[52],vs[52]);
-//m_world->CreateJoint(&jointDef3);
 
+///Adding Revolute joint between last and first chain unit
 jointDef3.Initialize(conveyer[0], conveyer[53],vs[0]);
 m_world->CreateJoint(&jointDef3);
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
-//left flipper joint
+///Revolute joint for left flipper 
 {
 //the motorised joint
 b2RevoluteJointDef revoluteJointDef;
@@ -891,7 +848,7 @@ revoluteJointDef.maxMotorTorque = 100.0f;
 //revoluteJointDef.motorSpeed = -90 * DEGTORAD;//90 degrees per second
 lflip = (b2RevoluteJoint*)m_world->CreateJoint( &revoluteJointDef );
 }
-//right flipper joint
+///Revolute joint for right flipper 
 {
 //the motorised joint
 b2RevoluteJointDef revoluteJointDef;
@@ -911,7 +868,7 @@ revoluteJointDef.maxMotorTorque = 100.0f;
 rflip = (b2RevoluteJoint*)m_world->CreateJoint( &revoluteJointDef );
 }
 
-//prismatic joint b/w tilt and right seperator
+///Prismatic joint between vertical ball lifter and the right seperator
 {
 
 
@@ -939,25 +896,21 @@ up= (b2PrismaticJoint*)m_world->CreateJoint( &prismaticJointDef );
     {
         switch (key)
 {
-case 'a':
+case 'a':///Keypress a for left flipper
 lflipper->ApplyAngularImpulse(2000.0f,true);
 break;
-case 'd':
+case 'd':///Keypress d for right flipper
 rflipper->ApplyAngularImpulse(-2000.0f,true);
 break;
-case 'l':
+case 'l': ///Keypress l for launcher
 launcher->ApplyLinearImpulse( b2Vec2(0,1100),launcher->GetWorldCenter() ,true);
 break;
-case 'q':
-right->SetMotorSpeed(4.0f);
-break;
-case 'w':
-right->SetMotorSpeed(-4.0f);
-break;
-case 'f':
+
+
+case 'f':///Keypress f to move the verical ball lifter up
 up->SetMotorSpeed(2.5f);
 break;
-case 'v':
+case 'v':///Keypress v to move the verical ball lifter down
 up->SetMotorSpeed(-2.5f);
 break;
 
