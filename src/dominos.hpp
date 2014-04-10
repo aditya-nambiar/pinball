@@ -88,9 +88,28 @@ void BeginContact(b2Contact* contact) {//check if fixture A was a ball
 		std::cout<<"enter\n";
 		for( long i=0; i<pow(10,8); i++){}
 		}
-	if(a==103 || a==104){
+	if( (a==103 && b==118 )||((a==103 && b==99 ))){
 	score+=15;
 	}
+	if( (a==104 && b==118 )||((a==118 && b==104 ))){
+		score+=15;
+	}
+	if( (a==101 && b==118 )||((a==118 && b==101 ))){
+		score+=05;
+	}
+	if( (a==90 && b==118 )||((a==118 && b==90 ))){
+		score+=10;
+	}
+	if( (a==120 && b==118 )||((a==118 && b==120 ))){
+		score+=10;
+	}
+	if( (a==117 && b==118 )||((a==118 && b==117 ))){
+		score+=10;
+	}
+	if( (a==301 && b==118 )||((a==118 && b==301 ))){
+		score+=30;
+	}
+	
 	if(a==201 || b==201){
 	std::cout << "done\n";
 	killball = true;	

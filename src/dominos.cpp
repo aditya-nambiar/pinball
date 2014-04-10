@@ -73,14 +73,14 @@ reflector->CreateFixture(&fixtureDef);
 ///Creating bumper ball 2
 bod2.position = b2Vec2(3.0f, 26.0f);
 reflector2 = m_world->CreateBody(&bod2);
-int myint2=302;
+int myint2=301;
 reflector2->SetUserData((void*)myint2);
 reflector2->CreateFixture(&fixtureDef);
 
 ///Creating bumper ball 3
 bod3.position = b2Vec2(3.0f, 32.0f);
 reflector3 = m_world->CreateBody(&bod3);
-int myint3=303;
+int myint3=301;
 reflector3->SetUserData((void*)myint3);
 reflector3->CreateFixture(&fixtureDef);
 
@@ -315,7 +315,7 @@ body->CreateFixture(&shape, density);
 
 shape.SetAsBox(0.01, 1, b2Vec2(0,0), 0.8);
 body->CreateFixture(&shape, density);
-int myint=101;
+int myint=90;
 body->SetUserData((void*)myint);
 }
 ///The hinge on with the spinner rotates about
@@ -360,7 +360,7 @@ body->CreateFixture(&shape, density);
 
 shape.SetAsBox(0.01, 1, b2Vec2(0,0), 0.8);
 body->CreateFixture(&shape, density);
-int myint=101;
+int myint=90;
 body->SetUserData((void*)myint);
 }
 ///The hinge on with the spinner rotates about
@@ -753,9 +753,11 @@ b8->CreateFixture(&shape, 3.0f);
 }
 
 
+//gear3->ApplyAngularImpulse(-3000.0f,true);
 anchor.Set(-3.8f,-1.0f);
 jd.Initialize(gear3, b8, anchor);
 m_world->CreateJoint(&jd);
+gear3->ApplyAngularImpulse(-3000.0f,true);
 }
 	b2Vec2 vs[100];
 
