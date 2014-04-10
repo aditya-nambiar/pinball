@@ -1,0 +1,53 @@
+This is BibTeX, Version 0.99d (TeX Live 2013)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: cs296_report_21.aux
+The style file: plain.bst
+Database file #1: citations.bib
+Warning--entry type for "cs296_21:1" isn't style-file defined
+--line 1 of file citations.bib
+Warning--entry type for "cs296_21:2" isn't style-file defined
+--line 6 of file citations.bib
+Warning--entry type for "cs296_21:3" isn't style-file defined
+--line 11 of file citations.bib
+You've used 4 entries,
+            2118 wiz_defined-function locations,
+            507 strings with 4118 characters,
+and the built_in function-call counts, 751 in all, are:
+= -- 56
+> -- 28
+< -- 0
++ -- 12
+- -- 8
+* -- 25
+:= -- 126
+add.period$ -- 5
+call.type$ -- 4
+change.case$ -- 12
+chr.to.int$ -- 0
+cite$ -- 4
+duplicate$ -- 30
+empty$ -- 85
+format.name$ -- 8
+if$ -- 156
+int.to.chr$ -- 0
+int.to.str$ -- 4
+missing$ -- 0
+newline$ -- 16
+num.names$ -- 8
+pop$ -- 29
+preamble$ -- 1
+purify$ -- 12
+quote$ -- 0
+skip$ -- 43
+stack$ -- 0
+substring$ -- 20
+swap$ -- 5
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 16
+warning$ -- 0
+while$ -- 8
+width$ -- 5
+write$ -- 25
+(There were 3 warnings)
