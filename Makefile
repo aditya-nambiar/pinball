@@ -131,3 +131,13 @@ distclean: clean
 	@$(RM) -rf ./external/lib/*
 	@$(RM) -rf ./external/src/Box2D	
 	@$(ECHO) "Done"	
+	
+report:
+	cd doc; \
+	latex cs296_report_21; \
+	bibtex cs296_report_21; \
+	latex cs296_report_21; \
+	latex cs296_report_21; \
+	dvipdf cs296_report_21.dvi cs296_report_21.pdf; \
+	cd ..
+

@@ -46,7 +46,6 @@ namespace cs296
 {
 int32 score;
 bool killball;
-bool killball2;
 bool smallkaro1;
 bool smallkaro2;
 bool smallkaro3;
@@ -71,7 +70,7 @@ void BeginContact(b2Contact* contact) {//check if fixture A was a ball
 	void *lo= contact->GetFixtureB()->GetBody()->GetUserData();
 	int a=*((int*)(&yo));
 	int b=*((int*)(&lo));
-	if (*((int*)(&yo))==109){
+	if ((a==109 && b==118 )||((a==118 && b==109 ))){
 		ball->SetLinearVelocity(b2Vec2(0,0));
 		up->SetMotorSpeed(2.5f);
 		std::cout<<"enter\n";
@@ -80,18 +79,14 @@ void BeginContact(b2Contact* contact) {//check if fixture A was a ball
 	if(a==103 || a==104){
 	score+=15;
 	}
-	if(a==401 || b==401){
+	if(a==201 || b==201){
 	std::cout << "done\n";
 	killball = true;	
 	}
-	if(a==402 || b==402){
-	std::cout << "done\n";
-	killball2 = true;	
-	}
-
-	if(a==108 || b==108){
-	ball->SetLinearVelocity(b2Vec2(4,0));
-	}
+	
+	// if(a==108 || b==108){
+// 	ball->SetLinearVelocity(b2Vec2(4,0));
+// 	}
 	if(a==301 || b==301){
 	smallkaro1 = true;
 	}
@@ -109,7 +104,7 @@ void EndContact(b2Contact* contact) {
 	void *lo= contact->GetFixtureB()->GetBody()->GetUserData();
 	int a =*((int*)(&yo));
 	int b=*((int*)(&lo));
-	if (a==109){
+	if ((a==109 && b==118 )||((a==118 && b==109 ))){
 		for( long i=0; i<pow(10,8); i++){}
 		up->SetMotorSpeed(-2.5f);
 		std::cout<<"exit\n";

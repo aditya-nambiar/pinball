@@ -37,7 +37,6 @@ namespace cs296
 //int32 wer=0;
 extern int32 score;
 extern bool killball;
-extern bool killball2;
 extern bool smallkaro1;
 extern bool smallkaro2;
 extern bool smallkaro3;
